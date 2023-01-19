@@ -1,0 +1,64 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.review-card {
+  background-color: white;
+  border-top: 2px solid #efefef;
+  padding-top: 15rpx;
+}
+.first-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.first-line .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10rpx;
+}
+.first-line .info .avatar {
+  width: 65rpx;
+  height: 65rpx;
+  border-radius: 45px;
+  border: 2px solid #FFF;
+  box-shadow: 0 1px 5px black;
+}
+.first-line .info .nickname {
+  font-size: 16px;
+  color: black;
+  padding-left: 10rpx;
+  font-weight: 600px;
+}
+.first-line .time {
+  font-size: 14px;
+  color: gray;
+}
+.second-line {
+  background-color: lightgray;
+  border-radius: 15rpx;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+  margin-top: 15rpx;
+  padding-top: 10rpx;
+  padding-bottom: 45rpx;
+  font-size: 15px;
+}
+.second-line .detail {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.third-line {
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 40rpx;
+  font-weight: 700;
+}
+

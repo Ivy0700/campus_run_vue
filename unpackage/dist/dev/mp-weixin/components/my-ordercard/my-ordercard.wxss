@@ -1,0 +1,57 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.ordercard {
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 15rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10rpx;
+}
+.top-section .status {
+  padding-left: 10rpx;
+  font-size: 20px;
+  font-weight: 600;
+}
+.top-section .time {
+  font-size: 14px;
+  color: gray;
+}
+.content {
+  padding-top: 10rpx;
+  padding-bottom: 18rpx;
+  display: flex;
+}
+.content .content-detail {
+  font-size: 15px;
+  color: dimgray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.review1 {
+  padding-bottom: 18rpx;
+}
+.review1 .review1-btn {
+  font-size: 12px;
+  font-weight: 560;
+  background-color: white;
+  color: royalblue;
+  width: 180rpx;
+  height: 60rpx;
+  border-radius: 20px;
+  text-align: center;
+  position: relative;
+  left: 38%;
+  vertical-align: middle;
+  border: 2px solid royalblue;
+}
+

@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.title {
+  background-color: white;
+}
+.cost {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 100rpx;
+  border-bottom: 2px #efefef solid;
+}
+.cost .cost-left {
+  font-size: 14px;
+  font-weight: 540;
+  padding-left: 25rpx;
+}
+.cost .cost-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250rpx;
+  padding-right: 4rpx;
+}
+.cost .cost-right .img-money {
+  justify-content: center;
+  width: 30rpx;
+  height: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 4rpx;
+}
+.cost .cost-right .money {
+  justify-content: center;
+}
+.content {
+  background-color: white;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 20rpx;
+  justify-content: center;
+}
+.btn {
+  margin-top: 40rpx;
+}
+.address {
+  border: 2px solid #efefef;
+  margin-bottom: 2px;
+  background-color: white;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.address-choose-box {
+  height: 180rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.address-info-box {
+  font-size: 12px;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5px;
+}
+.address-info-box .row1 {
+  display: flex;
+  justify-content: space-between;
+}
+.address-info-box .row1 .row1-right {
+  display: flex;
+  justify-content: space-between;
+}
+.address-info-box .row2 {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.address-info-box .row2 .row2-left {
+  white-space: nowrap;
+}
+.address-info-box .row3 {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+.address-info-box .row3 .row3-left {
+  white-space: nowrap;
+}
+

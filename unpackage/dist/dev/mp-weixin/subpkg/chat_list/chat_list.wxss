@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.main .friends .friend-list {
+  height: 96rpx;
+  padding: 16rpx 10rpx;
+}
+.main .friends .friend-list:active {
+  background-color: lightgray;
+}
+.main .friends .friend-list .friend-list-l {
+  position: relative;
+  float: left;
+}
+.main .friends .friend-list .friend-list-l .img {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 10px;
+}
+.main .friends .friend-list .friend-list-l .tip {
+  position: absolute;
+  z-index: 100;
+  top: -6rpx;
+  left: 68rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  background: #ff5d5b;
+  border-radius: 18px;
+  font-size: 12px;
+  color: white;
+  line-height: 36rpx;
+  text-align: center;
+}
+.main .friends .friend-list .friend-list-r {
+  padding-left: 128rpx;
+}
+.main .friends .friend-list .friend-list-r .top {
+  height: 50rpx;
+}
+.main .friends .friend-list .friend-list-r .top .name {
+  float: left;
+  font-size: 36rpx;
+  font-weight: 400;
+  color: #272832;
+  line-height: 50rpx;
+}
+.main .friends .friend-list .friend-list-r .top .time {
+  float: right;
+  font-size: 15px;
+  color: darkgray;
+  line-height: 50rpx;
+}
+.main .friends .friend-list .friend-list-r .content {
+  font-size: 28rpx;
+  color: dimgray;
+  line-height: 40rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+

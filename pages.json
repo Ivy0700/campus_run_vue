@@ -1,17 +1,160 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/my/my",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+
 		}
-	}],
+	}, {
+		"path": "pages/home/home",
+		"style": {
+
+		}
+	}, {
+		"path": "subpkg/search/search",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "subpkg/chat/chat",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false,
+			"app-plus": {
+				"titleNView": {
+					"autoBackButton": true
+				}
+			}
+		}
+
+	}, {
+		"path": "subpkg/order_detail/order_detail",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "subpkg/add_order/add_order",
+		"style": {
+			"navigationBarTitleText": "发布",
+			"enablePullDownRefresh": false,	
+			"app-plus": {
+				"titleNView": {
+					"autoBackButton": true
+				}
+			}
+			
+		}
+
+	}    ,{
+            "path" : "subpkg/update_order/update_order",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/address/address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/errand_detail/errand_detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/orderlist/orderlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/errandlist/errandlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/add_address/add_address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址",
+                "enablePullDownRefresh": false,
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": true
+					}
+				}
+				
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/review/review",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "subpkg/chat_list/chat_list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"app-plus": {
-			"background": "#efeff4"
-		}
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "校园跑腿小程序",
+		"navigationBarBackgroundColor": "#228BE6",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"selectedColor": "#228BE6",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"text": "首页",
+				"iconPath": "static/tab_icons/home.png",
+				"selectedIconPath": "static/tab_icons/home-active.png"
+			},
+			{
+				"pagePath": "subpkg/add_order/add_order",
+				"text": "发布",
+				"iconPath": "static/tab_icons/add.png",
+				"selectedIconPath": "static/tab_icons/add.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tab_icons/my.png",
+				"selectedIconPath": "static/tab_icons/my-active.png"
+			}
+		]
+
 	}
+
 }

@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.my-search-box {
+  height: 36px;
+  background-color: #FFFFFF;
+  width: 500rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #efefef;
+  padding-top: 5rpx;
+}
+.placeholder {
+  font-size: 15px;
+  margin-left: 5px;
+}
+

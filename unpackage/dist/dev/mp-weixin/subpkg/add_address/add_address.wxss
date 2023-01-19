@@ -1,0 +1,98 @@
+
+page {
+	background-color: white;
+}
+
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.info {
+  margin-top: 30rpx;
+}
+.info .first-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-bottom: 10rpx;
+}
+.info .first-line .receiver {
+  font-size: 15px;
+}
+.info .first-line .first-input {
+  width: 400rpx;
+  justify-content: center;
+}
+.info .second-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.info .second-line .phoneNum {
+  font-size: 15px;
+}
+.info .second-line .second-input {
+  width: 400rpx;
+  justify-content: center;
+}
+.info .third-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.info .third-line .startingPoint {
+  font-size: 15px;
+}
+.info .third-line .third-input {
+  width: 400rpx;
+  justify-content: center;
+}
+.info .fourth-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.info .fourth-line .destination {
+  font-size: 15px;
+}
+.info .fourth-line .fourth-input {
+  width: 400rpx;
+  justify-content: center;
+}
+.info .fifth-line {
+  padding-top: 20rpx;
+  padding-left: 20rpx;
+  align-items: center;
+  display: flex;
+}
+.info .fifth-line .default-text {
+  font-size: 15px;
+  padding-left: 15rpx;
+}
+.add-section {
+  background-color: white;
+  padding-top: 120rpx;
+  padding-bottom: 10rpx;
+  justify-content: center;
+}
+.add-section .add-btn {
+  font-size: 15px;
+  font-weight: 580;
+  background-color: #5500ff;
+  color: #FFF;
+  width: 500rpx;
+  height: 75rpx;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
