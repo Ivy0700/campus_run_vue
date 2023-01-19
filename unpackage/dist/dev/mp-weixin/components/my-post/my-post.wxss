@@ -1,0 +1,131 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.post-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px 5px;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #FFF;
+  margin-top: 5px;
+  width: 750rpx;
+  height: 360rpx;
+}
+.post-container .poster-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.post-container .poster-info .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10rpx;
+}
+.post-container .poster-info .info .avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 45px;
+  border: 2px solid #FFF;
+  box-shadow: 0 1px 5px black;
+}
+.post-container .poster-info .info .nickname {
+  font-size: 13px;
+  color: black;
+  padding-left: 10rpx;
+  font-weight: 580px;
+}
+.post-container .poster-info .post-time {
+  font-size: 13px;
+  color: gray;
+}
+.post-container .post-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10rpx;
+  padding-left: 20rpx;
+  height: 300rpx;
+}
+.post-container .post-content .title {
+  font-size: 18px;
+  font-weight: 650;
+}
+.post-container .post-content .content {
+  padding-top: 5rpx;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+.post-container .post-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-container .post-info .address {
+  padding-left: 5rpx;
+  align-items: center;
+  display: flex;
+}
+.post-container .post-info .address .img-address {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 45px;
+}
+.post-container .post-info .address .text-address {
+  padding-left: 5rpx;
+  font-weight: 800;
+}
+.post-container .post-info .specific-info {
+  align-items: center;
+}
+.post-container .post-info .specific-info .cost {
+  display: flex;
+  align-items: center;
+}
+.post-container .post-info .specific-info .cost .img-cost {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 45px;
+}
+.post-container .post-info .specific-info .cost .money .currency {
+  font-size: 13px;
+}
+.post-container .post-info .specific-info .cost .money .text-cost {
+  font-size: 13px;
+}
+.post-container .post-info .specific-info .expectedTime {
+  display: flex;
+  align-items: center;
+}
+.post-container .post-info .specific-info .expectedTime .img-expectedTime {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 45px;
+}
+.post-container .post-info .specific-info .expectedTime .time .expectedStartTime {
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #55aaff;
+  font-weight: 550;
+}
+.post-container .post-info .specific-info .expectedTime .time .time-line {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #55aaff;
+  font-weight: 550;
+}
+.post-container .post-info .specific-info .expectedTime .time .expectedEndTime {
+  font-size: 13px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #55aaff;
+  font-weight: 550;
+}
+

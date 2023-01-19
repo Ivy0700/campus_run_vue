@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "发布",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "my-order": "/components/my-order/my-order"
+  }
+}

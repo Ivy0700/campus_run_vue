@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/my/my",
+    "pages/home/home",
+    "subpkg/search/search",
+    "subpkg/chat/chat",
+    "subpkg/order_detail/order_detail",
+    "subpkg/add_order/add_order",
+    "subpkg/update_order/update_order",
+    "subpkg/address/address",
+    "subpkg/errand_detail/errand_detail",
+    "subpkg/orderlist/orderlist",
+    "subpkg/errandlist/errandlist",
+    "subpkg/add_address/add_address",
+    "subpkg/review/review",
+    "subpkg/chat_list/chat_list"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "校园跑腿小程序",
+    "navigationBarBackgroundColor": "#228BE6",
+    "backgroundColor": "#FFFFFF"
+  },
+  "tabBar": {
+    "selectedColor": "#228BE6",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/tab_icons/home.png",
+        "selectedIconPath": "static/tab_icons/home-active.png"
+      },
+      {
+        "pagePath": "subpkg/add_order/add_order",
+        "text": "发布",
+        "iconPath": "static/tab_icons/add.png",
+        "selectedIconPath": "static/tab_icons/add.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "static/tab_icons/my.png",
+        "selectedIconPath": "static/tab_icons/my-active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

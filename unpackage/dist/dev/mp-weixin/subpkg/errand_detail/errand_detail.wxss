@@ -1,0 +1,127 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.errand-status {
+  align-items: center;
+  display: flex;
+  margin-top: 20rpx;
+  margin-bottom: 45rpx;
+  padding-left: 30rpx;
+}
+.errand-status .status {
+  font-size: 22px;
+  font-weight: 650;
+}
+.errand-status .chevron {
+  padding-left: 15rpx;
+  width: 20rpx;
+  height: 20rpx;
+}
+.title-section {
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 20rpx;
+  align-items: center;
+  padding-bottom: 30rpx;
+  padding-top: 30rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.title-section .title {
+  font-size: 20px;
+  font-weight: 700;
+}
+.middle-section {
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 20rpx;
+  font-size: 14px;
+}
+.middle-section .row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.middle-section .row1 .row1-left {
+  color: gray;
+}
+.middle-section .row1 .row1-right {
+  align-items: center;
+  display: flex;
+}
+.middle-section .row1 .row1-right .image-money {
+  justify-content: center;
+  width: 30rpx;
+  height: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 4rpx;
+}
+.middle-section .row2 {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15rpx;
+}
+.middle-section .row2 .row2-left {
+  color: gray;
+}
+.middle-section .row3 {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15rpx;
+}
+.middle-section .row3 .row3-left {
+  color: gray;
+}
+.bottom-section {
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  margin-top: 20rpx;
+  align-items: center;
+  padding: 15px 15px;
+}
+.bottom-section .content {
+  font-size: 15px;
+  font-weight: 540;
+}
+.bottom-button {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 999;
+  background-color: white;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  border-top: #efefef 1px solid;
+  display: flex;
+  align-items: center;
+}
+.bottom-button .button-left {
+  font-size: 15px;
+  font-weight: 580;
+  background-color: blue;
+  color: #FFF;
+  width: 300rpx;
+  height: 75rpx;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.bottom-button .button-right {
+  font-size: 15px;
+  font-weight: 580;
+  background-color: red;
+  color: #FFF;
+  width: 300rpx;
+  height: 75rpx;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+

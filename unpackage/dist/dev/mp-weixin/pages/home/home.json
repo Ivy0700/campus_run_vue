@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "my-search": "/components/my-search/my-search",
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "my-post": "/components/my-post/my-post"
+  }
+}

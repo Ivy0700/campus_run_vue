@@ -1,0 +1,1 @@
+<view><my-order class="vue-ref" vue-id="3cd6da68-1" address="{{address}}" data-ref="order" bind:__l="__l"></my-order></view>

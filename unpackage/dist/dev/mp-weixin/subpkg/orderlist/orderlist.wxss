@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.active {
+  color: blue;
+  font-weight: 555;
+}
+.top-section {
+  background-color: white;
+  padding-top: 19rpx;
+  padding-bottom: 19rpx;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 14px;
+}
+.empty-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty-section .empty-img {
+  padding-top: 90rpx;
+  height: 180rpx;
+  width: 180rpx;
+}
+.empty-section .empty-text {
+  font-size: 13px;
+  padding-top: 17rpx;
+  color: #828282;
+}
+
