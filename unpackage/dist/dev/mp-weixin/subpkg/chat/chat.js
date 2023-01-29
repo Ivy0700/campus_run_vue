@@ -292,6 +292,8 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
     this.connectSocket();
   },
   onUnload: function onUnload() {
+    this.isUnLoad = true;
+    clearInterval(this.reconnectTimer);
     this.closeSocket();
   },
   data: function data() {
@@ -371,7 +373,9 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
       isLoading: false,
       socketTask: '',
       timer: '',
+      reconnectTimer: '',
       socketOpen: false,
+      isUnLoad: false,
       maxTaskCount: 5 };
 
 
@@ -571,7 +575,7 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
     connectSocket: function connectSocket() {
       var that = this;
       this.socketTask = uni.connectSocket({
-        url: 'wss://127.0.0.1:8183/ws',
+        url: 'ws://127.0.0.1:8183/campus_runrun',
         // header: {
         // 		'content-type': 'application/json'
         // 	},
@@ -593,21 +597,9 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
 
       this.socketTask.onOpen(function (res) {
         console.log("WebSocket连接已打开");
+        clearInterval(that.reconnectTimer);
         //定期发送心跳
-        var msg = {
-          "type": "0",
-          "chatRecordSendVO": {
-            "fromUserId": "123" } };
-
-
-
-        that.socketOpen = true;
-        that.sendSocketMessage(JSON.stringify(msg)).then(function (res) {
-          console.log("心跳成功");
-        }).catch(function (res) {
-          console.log("发送失败");
-          console.log(res);
-        });
+        // that.heart()
       });
 
       this.socketTask.onMessage(function (res) {
@@ -615,12 +607,15 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
         //对获取内容操作
       });
 
+      //1. 服务器关闭，onError -> onClose 重连
+      //2. 服务器关闭通道， onClose 重连
+      //3. wss, onError-> onClose 重连
       this.socketTask.onError(function (res) {
         console.log("WebSocket连接打开失败，请检查");
         console.log(res);
         that.socketOpen = false;
         //进入重新连接
-        that.reconnect();
+        // that.reconnect()
       });
 
       this.socketTask.onClose(function (e) {
@@ -630,7 +625,8 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
 
         //如果不是主动关闭的就重新连接
         //socketOpen在连接成功后应该一直是true, 只有onError是false，false的话就要重连
-        if (!that.socketOpen) {
+        if (!that.socketOpen || !that.isUnLoad) {
+          console.log("不是主动关闭的");
           that.reconnect();
         }
       });
@@ -638,17 +634,23 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
 
     },
     //进入重新连接
-    reconnect: function reconnect() {
+    reconnect: function reconnect() {var _this2 = this;
       console.log("进入断线重连");
       this.socketTask = '';
-      this.connectSocket();
+      if (this.reconnectTimer === '') {
+        console.log("执行了1次");
+        this.reconnectTimer = setInterval(function () {
+          _this2.connectSocket();
+        }, 1000);
+      }
+      // this.connectSocket()
     },
     //发送消息
-    sendSocketMessage: function sendSocketMessage(msg) {var _this2 = this;
+    sendSocketMessage: function sendSocketMessage(msg) {var _this3 = this;
       console.log("发送信息");
       console.log(JSON.stringify(msg));
       return new Promise(function (resolve, reject) {
-        _this2.socketTask.send({
+        _this3.socketTask.send({
           data: msg,
           success: function success(res) {
             console.log("发送成功");
@@ -667,7 +669,7 @@ var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date
       clearInterval(this.timer);
       this.timer = '';
       var msg = {
-        "type": "heartbeat" };
+        "type": "3" };
 
       this.timer = setInterval(function () {
         that.sendSocketMessage(JSON.stringify(msg)).then(function (res) {

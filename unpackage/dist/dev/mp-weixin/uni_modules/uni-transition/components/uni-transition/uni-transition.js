@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-Component({})
-=======
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["uni_modules/uni-transition/components/uni-transition/uni-transition"],{
 
 /***/ 197:
@@ -405,4 +402,3 @@ var _createAnimation = __webpack_require__(/*! ./createAnimation */ 202);functio
     },
     [['uni_modules/uni-transition/components/uni-transition/uni-transition-create-component']]
 ]);
->>>>>>> tabbar
