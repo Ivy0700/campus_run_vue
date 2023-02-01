@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "my-ordercard": "/components/my-ordercard/my-ordercard"
+    "my-login": "/components/my-login/my-login",
+    "my-userinfo": "/components/my-userinfo/my-userinfo"
   }
 }
