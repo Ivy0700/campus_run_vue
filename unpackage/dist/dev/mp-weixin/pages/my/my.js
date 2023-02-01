@@ -107,29 +107,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
-try {
-  components = {
-    myOrdercard: function() {
-      return __webpack_require__.e(/*! import() | components/my-ordercard/my-ordercard */ "components/my-ordercard/my-ordercard").then(__webpack_require__.bind(null, /*! @/components/my-ordercard/my-ordercard.vue */ 177))
-    }
-  }
-} catch (e) {
-  if (
-    e.message.indexOf("Cannot find module") !== -1 &&
-    e.message.indexOf(".vue") !== -1
-  ) {
-    console.error(e.message)
-    console.error("1. 排查组件名称拼写是否正确")
-    console.error(
-      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
-    )
-    console.error(
-      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
-    )
-  } else {
-    throw e
-  }
-}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -165,126 +142,25 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 13);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
-    return {
-      avatar: "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-      nickname: "123",
-      list: [
-        // {
-        // 	"status": "待评价",
-        // 	"updateTime": "10-01 11:59",
-        // 	"title": "求帮忙",
-        // 	"content": "1233333333333333333333asdddddddddddddddddddd"
-        // },
-        // {
-        // 	"status": "已评价",
-        // 	"updateTime": "10-01 11:59",
-        // 	"title": "求帮忙",
-        // 	"content": "1233333333333333333333asdddddddddddddddddddd"
-        // }
-      ],
-      leftColor: 'blue',
-      rightColor: 'black',
-      orderNum: 0,
-      errandNum: 0,
-      choice: '' };
+    return {};
+
 
   },
-  methods: {
-    clickLeft: function clickLeft() {
-      this.leftColor = '#0000ff';
-      this.rightColor = 'black';
-      this.choice = 'order';
-      this.list = [
-      {
-        "status": "待评价",
-        "updateTime": "10-01 11:59",
-        "title": "求帮忙",
-        "content": "1233333333333333333333asdddddddddddddddddddd",
-        "orderId": "1234" },
-
-      {
-        "status": "已评价",
-        "updateTime": "10-01 11:59",
-        "title": "求帮忙",
-        "content": "1233333333333333333333asdddddddddddddddddddd",
-        "orderId": "1234" }];
-
-
-    },
-    clickRight: function clickRight() {
-      this.leftColor = 'black';
-      this.rightColor = '#0000ff';
-      this.choice = 'errand';
-      this.list = [
-      {
-        "status": "已完成",
-        "updateTime": "10-01 11:59",
-        "title": "求帮忙",
-        "content": "1233333333333333333333asdddddddddddddddddddd",
-        "errandId": "1245" },
-
-      {
-        "status": "正在跑腿中",
-        "updateTime": "10-01 11:59",
-        "title": "求帮忙",
-        "content": "1233333333333333333333asdddddddddddddddddddd",
-        "errandId": "1245" }];
-
-
-    } } };exports.default = _default;
+  computed: _objectSpread({},
+  (0, _vuex.mapState)('m_user', ['token'])) };exports.default = _default;
 
 /***/ }),
 /* 22 */
