@@ -14,69 +14,140 @@
 
 <script>
 	export default {
+		onLoad() {
+			this.clickItem(1)
+		},
 		data() {
 			return {
 				curIndex: 1,
-				list: [{
-					"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-					"nickname": "123",
-					"openid": "2344323423234",
-					"postTime": "2022-10-01 11:30",
-					"reviewId": "434345",
-					"title": "求帮带快递",
-					// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
-					"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
-					"review": "这位同学很好哦，很快就送到了",
-					"orderId": "123",
-					"status": "已完成"
-				},{
-					"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-					"nickname": "123",
-					"openid": "2344323423234",
-					"postTime": "2022-10-01 11:30",
-					"reviewId": "434345",
-					"title": "求帮带快递",
-					// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
-					"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
-					"review": "这位同学很好哦，很快就送到了",
-					"orderId": "123",
-					"status": "已完成"
+				list: [
+					// {
+				// 	"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
+				// 	"nickname": "123",
+				// 	"openid": "2344323423234",
+				// 	"postTime": "2022-10-01 11:30",
+				// 	"reviewId": "434345",
+				// 	"title": "求帮带快递",
+				// 	// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
+				// 	"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
+				// 	"review": "这位同学很好哦，很快就送到了",
+				// 	"orderId": "123",
+				// 	"status": "已完成"
+				// },{
+				// 	"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
+				// 	"nickname": "123",
+				// 	"openid": "2344323423234",
+				// 	"postTime": "2022-10-01 11:30",
+				// 	"reviewId": "434345",
+				// 	"title": "求帮带快递",
+				// 	// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
+				// 	"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
+				// 	"review": "这位同学很好哦，很快就送到了",
+				// 	"orderId": "123",
+				// 	"status": "已完成"
+				// },
+				// {
+				// 	"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
+				// 	"nickname": "123",
+				// 	"openid": "2344323423234",
+				// 	"postTime": "2022-10-01 11:30",
+				// 	"reviewId": "434345",
+				// 	"title": "求帮带快递",
+				// 	// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
+				// 	"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
+				// 	"review": "这位同学很好哦，很快就送到了",
+				// 	"orderId": "123",
+				// 	"status": "已完成"
+				// },
+				// {
+				// 	"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
+				// 	"nickname": "123",
+				// 	"openid": "2344323423234",
+				// 	"postTime": "2022-10-01 11:30",
+				// 	"reviewId": "434345",
+				// 	"title": "求帮带快递",
+				// 	// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
+				// 	"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
+				// 	"review": "这位同学很好哦，很快就送到了",
+				// 	"orderId": "123",
+				// 	"status": "已完成"
+				// }
+				],
+				queryObj: {
+					page: 1,
+					size: 5
 				},
-				{
-					"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-					"nickname": "123",
-					"openid": "2344323423234",
-					"postTime": "2022-10-01 11:30",
-					"reviewId": "434345",
-					"title": "求帮带快递",
-					// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
-					"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
-					"review": "这位同学很好哦，很快就送到了",
-					"orderId": "123",
-					"status": "已完成"
-				},
-				{
-					"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-					"nickname": "123",
-					"openid": "2344323423234",
-					"postTime": "2022-10-01 11:30",
-					"reviewId": "434345",
-					"title": "求帮带快递",
-					// "content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。"
-					"content": "求帮忙这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了这位同学很好哦，很快就送到了",
-					"review": "这位同学很好哦，很快就送到了",
-					"orderId": "123",
-					"status": "已完成"
-				}
-				]
+				total: 0,
+				isLoading: false
 			};
 		},
 		methods: {
 			clickItem(index) {
 				this.curIndex = index
+				this.resetParam()
+				if (this.curIndex === 1) {
+					this.getReviewFromOthers()
+				} else if (this.curIndex === 2) {
+					this.getReviewFromSelf()
+				}
 			},
+			async getReviewFromSelf(cb) {
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/review/getReviewFromSelf', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.total = res.data.data.totalCount
+			},
+			async getReviewFromOthers(cb) {
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/review/getReviewFromOthers', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.total = res.data.data.totalCount
+			},
+			resetParam() {
+				//重置关键数据
+				this.queryObj.page = 1
+				// this.total = 0
+				this.isLoading = false
+				this.list = []
+			},
+			
 
-		}
+		},
+		onReachBottom() {
+			if (this.queryObj.page * this.queryObj.size >= this.total) return uni.$showMsg('数据加载完毕')
+			if (this.isLoading) return
+			
+			this.queryObj.page++;
+			if (this.curIndex === 1) {
+				this.getReviewFromOthers()
+			} else if (this.curIndex === 2) {
+				this.getReviewFromSelf()
+			}
+		},
+		onPullDownRefresh() {
+			
+			this.resetParam()
+			if (this.curIndex === 1) {
+				this.getReviewFromOthers(() => uni.stopPullDownRefresh())
+			} else if (this.curIndex === 2) {
+				this.getReviewFromSelf(() => uni.stopPullDownRefresh())
+			}
+			
+			
+			
+		},
 	}
 </script>
 

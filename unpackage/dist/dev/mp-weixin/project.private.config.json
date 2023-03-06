@@ -83,6 +83,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/orderlist/orderlist",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "subpkg/review/review",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

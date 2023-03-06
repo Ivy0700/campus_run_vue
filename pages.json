@@ -2,12 +2,14 @@
 	"pages": [{
 		"path": "pages/my/my",
 		"style": {
-
+			"onReachBottomDistance": 150,
+			"enablePullDownRefresh": true
 		}
 	}, {
 		"path": "pages/home/home",
 		"style": {
-
+			"onReachBottomDistance": 150,
+			"enablePullDownRefresh": true
 		}
 	}, {
 		"path": "subpkg/search/search",
@@ -39,94 +41,81 @@
 		"path": "subpkg/add_order/add_order",
 		"style": {
 			"navigationBarTitleText": "发布",
-			"enablePullDownRefresh": false,	
+			"enablePullDownRefresh": false,
 			"app-plus": {
 				"titleNView": {
 					"autoBackButton": true
 				}
 			}
-			
+
 		}
 
-	}    ,{
-            "path" : "subpkg/update_order/update_order",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/address/address",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/errand_detail/errand_detail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/orderlist/orderlist",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/errandlist/errandlist",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/add_address/add_address",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "地址",
-                "enablePullDownRefresh": false,
-				"app-plus": {
-					"titleNView": {
-						"autoBackButton": true
-					}
+	}, {
+		"path": "subpkg/update_order/update_order",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "subpkg/address/address",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "subpkg/errand_detail/errand_detail",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "subpkg/orderlist/orderlist",
+		"style": {
+			"navigationBarTitleText": "",
+			"onReachBottomDistance": 150,
+			"enablePullDownRefresh": true
+		}
+
+	}, {
+		"path": "subpkg/errandlist/errandlist",
+		"style": {
+			"navigationBarTitleText": "",
+			"onReachBottomDistance": 150,
+			"enablePullDownRefresh": true
+		}
+
+	}, {
+		"path": "subpkg/add_address/add_address",
+		"style": {
+			"navigationBarTitleText": "地址",
+			"enablePullDownRefresh": false,
+			"app-plus": {
+				"titleNView": {
+					"autoBackButton": true
 				}
-				
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/review/review",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "subpkg/chat_list/chat_list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+			}
+
+		}
+
+	}, {
+		"path": "subpkg/review/review",
+		"style": {
+			"navigationBarTitleText": "",
+			"onReachBottomDistance": 150,
+			"enablePullDownRefresh": true
+		}
+
+	}, {
+		"path": "subpkg/chat_list/chat_list",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "校园跑腿小程序",

@@ -1,14 +1,16 @@
 <template>
 	<view>
 		<view class="top-section" >
-			<text class="first" @click="clickItem(1)" :class="curIndex === 1 ? 'active': ''">未接单</text>
-			<text class="second" @click="clickItem(2)" :class="curIndex === 2 ? 'active': ''">已接单</text>
-			<text class="third" @click="clickItem(3)" :class="curIndex === 3 ? 'active': ''">已完成</text>
-			<text class="fourth" @click="clickItem(4)" :class="curIndex === 4 ? 'active': ''">已取消</text>
+			<text class="first" @click="clickItem('UNACCEPTED')" :class="curChoice === 'UNACCEPTED' ? 'active': ''">未接单</text>
+			<text class="second" @click="clickItem('ACCEPTED')" :class="curChoice === 'ACCEPTED' ? 'active': ''">已接单</text>
+			<text class="second" @click="clickItem('DELIVERED')" :class="curChoice === 'DELIVERED' ? 'active': ''">已送达</text>
+			<text class="third" @click="clickItem('FINISHED')" :class="curChoice === 'FINISHED' ? 'active': ''">已完成</text>
+			<text class="third" @click="clickItem('REVIEWED')" :class="curChoice === 'REVIEWED' ? 'active': ''">已评价</text>
+			<text class="fourth" @click="clickItem('CANCELED')" :class="curChoice === 'CANCELED' ? 'active': ''">已取消</text>
 		</view>
 		
-		<block v-for="(order, i) in list" :key="i" v-if="list.length !== 0" >
-			<my-ordercard :order="order" :choice="cardChoice"></my-ordercard>
+		<block v-for="(order, i) in list" :key="i" v-if="list !== null && list.length !== 0" >
+			<my-ordercard :order="order" :choice="cardChoice" @getOrderList="clickItem(curChoice)"></my-ordercard>
 		</block>
 		<view class="empty-section" v-if="list.length === 0">
 			<image class="empty-img" mode="widthFix" src="https://img.icons8.com/stickers/100/null/list-is-empty.png" ></image>
@@ -19,19 +21,74 @@
 
 <script>
 	export default {
+		onLoad() {
+			this.clickItem('UNACCEPTED')
+		},
+		onShow() {
+			console.log("onShow:")
+			const statusChanged = uni.getStorageSync("statusChanged");
+			console.log(statusChanged)
+			if (statusChanged) {
+				this.resetParam()
+				this.clickItem(this.curChoice)
+			}
+			uni.removeStorageSync("statusChanged")
+		},
 		data() {
 			return {
 				list: [],
 				cardChoice: "order",
-				curIndex: 1
+				curChoice: "UNACCEPTED",
+				queryObj: {
+					page: 1,
+					size: 10
+				},
+				total: 0,
+				isLoading: false,
 			};
 		},
 		methods: {
-			clickItem(index) {
-				this.curIndex = index
+			clickItem(cur) {
+				this.resetParam()
+				this.curChoice = cur
+				this.queryObj.status = this.curChoice
+				this.getOrderList()
 			},
+			async getOrderList(cb) {
+				
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/order/getOrderByStatus', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.total = res.data.data.totalCount
+			},
+			resetParam() {
+				//重置关键数据
+				this.queryObj.page = 1
+				this.total = 0
+				this.isLoading = false
+				this.list = []
+			}
+		},
+		onReachBottom() {
+			if (this.queryObj.page * this.queryObj.size >= this.total) return uni.$showMsg('数据加载完毕')
+			if (this.isLoading) return
 			
-		}
+			this.queryObj.page++;
+			this.getOrderList()
+		},
+		onPullDownRefresh() {
+			
+			this.resetParam()
+			this.getOrderList(() => uni.stopPullDownRefresh())
+			
+			
+		},
 	}
 </script>
 

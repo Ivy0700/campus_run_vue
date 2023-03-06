@@ -1,6 +1,12 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
+.displaynone {
+  display: none;
+}
+.container {
+  padding-bottom: 100rpx;
+}
 .errand-status {
   align-items: center;
   display: flex;
@@ -91,10 +97,9 @@
   font-weight: 540;
 }
 .bottom-button {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   bottom: 0;
-  z-index: 999;
+  width: 100%;
   background-color: white;
   padding-top: 10rpx;
   padding-bottom: 10rpx;
@@ -102,7 +107,7 @@
   display: flex;
   align-items: center;
 }
-.bottom-button .button-left {
+.bottom-button .button-one {
   font-size: 15px;
   font-weight: 580;
   background-color: blue;
@@ -113,7 +118,29 @@
   text-align: center;
   vertical-align: middle;
 }
-.bottom-button .button-right {
+.bottom-button .button-three {
+  font-size: 15px;
+  font-weight: 580;
+  background-color: #aa55ff;
+  color: #FFF;
+  width: 300rpx;
+  height: 75rpx;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.bottom-button .button-four {
+  font-size: 15px;
+  font-weight: 580;
+  background-color: #ff702e;
+  color: #FFF;
+  width: 300rpx;
+  height: 75rpx;
+  border-radius: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+.bottom-button .button-two {
   font-size: 15px;
   font-weight: 580;
   background-color: red;

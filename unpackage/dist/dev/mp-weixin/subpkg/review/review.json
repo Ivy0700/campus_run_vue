@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "",
-  "enablePullDownRefresh": false,
+  "onReachBottomDistance": 150,
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "my-review": "/components/my-review/my-review"
   }

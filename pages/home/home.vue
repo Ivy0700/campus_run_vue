@@ -38,7 +38,28 @@
 
 <script>
 	export default {
-
+		onLoad() {
+			console.log("onLoad")
+			this.queryObj = {
+				"content": null,
+				"orderBy": "create_time",
+				"isAsc": false,
+				"page": 1,
+				"size": 10
+			}
+			this.orderList();
+		},
+		onShow() {
+			console.log("onShow:")
+			const statusChanged = uni.getStorageSync("statusChanged");
+			console.log(statusChanged)
+			if (statusChanged) {
+				this.resetParam()
+				this.orderList()
+			}
+			uni.removeStorageSync("statusChanged")
+			
+		},
 		data() {
 			return {
 				show: false,
@@ -46,59 +67,13 @@
 				orderBy: 'time',
 				order: 'desc',
 				choice: '时间最近',
-				list: [{
-					"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-					"nickname": "123",
-					"openid": "2344323423234",
-					"postTime": "2022-10-01 11:30",
-					"orderId": "434345",
-					"title": "求帮带快递",
-					"content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。",
-					"address": "西六",
-					"cost": 1,
-					"expectedStartTime": "10-01 11:30",
-					"expectedEndTime": "10-01 12:30"
-					},
-					{
-						"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-						"nickname": "123",
-						"openid": "2344323423234",
-						"postTime": "2022-10-01 11:30",
-						"orderId": "434345",
-						"title": "求帮带快递",
-						"content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。",
-						"address": "西六",
-						"cost": 1,
-						"expectedStartTime": "10-01 11:30",
-						"expectedEndTime": "10-01 12:30"
-					},
-					{
-						"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-						"nickname": "123",
-						"openid": "2344323423234",
-						"postTime": "2022-10-01 11:30",
-						"orderId": "434345",
-						"title": "求帮带快递",
-						"content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。",
-						"address": "西六",
-						"cost": 1,
-						"expectedStartTime": "10-01 11:30",
-						"expectedEndTime": "10-01 12:30"
-					},
-					{
-						"avatar": "https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png",
-						"nickname": "123",
-						"openid": "2344323423234",
-						"postTime": "2022-10-01 11:30",
-						"orderId": "434345",
-						"title": "求帮带快递",
-						"content": "px 即屏幕像素rpx 即响应式 px，一种根据屏幕宽度自适应的动态单位。以 750 宽的屏幕为基准，750rpx 恰好为屏幕宽度。屏幕变宽，rpx 实际显示效果会等比放大，但在 App（vue2 不含 nvue） 端和 H5（vue2） 端屏幕宽度达到 960px 时，默认将按照 375px 的屏幕宽度进行计算，具体配置参考：rpx 计算配置 。vue 页面支持下面这些普通 H5 单位，但在 nvue 里不支持：rem 根字体大小可以通过 page-meta 配置vh viewpoint height，视窗高度，1vh 等于视窗高度的 1%vw viewpoint width，视窗宽度，1vw 等于视窗宽度的 1%nvue 还不支持百分比单位。",
-						"address": "西六",
-						"cost": 1,
-						"expectedStartTime": "10-01 11:30",
-						"expectedEndTime": "10-01 12:30"
-					}
-				],
+				list: [],
+				total: 0,
+				isLoading: false,
+				queryObj: {
+					page: 1,
+					size: 10
+				},
 
 			};
 		},
@@ -124,32 +99,72 @@
 			},
 			orderByTimeDesc() {
 				this.choice = "时间最近"
-				this.orderBy = "time"
-				this.order = "desc"
+				this.queryObj.orderBy = "create_time"
+				this.queryObj.isAsc = false
 				this.$refs.popup.close('top')
+				this.resetParam()
+				this.orderList()
 			},
 			orderByTimeAsc() {
 				this.choice = "时间最久"
-				this.orderBy = "time"
-				this.order = "asc"
+				this.queryObj.orderBy = "create_time"
+				this.queryObj.isAsc = true
 				this.$refs.popup.close('top')
+				this.resetParam()
+				this.orderList()
 			},
 			orderByPriceDesc() {
 				this.choice = "价格降序"
-				this.orderBy = "price"
-				this.order = "desc"
+				this.queryObj.orderBy = "cost"
+				this.queryObj.isAsc = false
 				this.$refs.popup.close('top')
+				this.resetParam()
+				this.orderList()
 			},
 			orderByPriceAsc() {
 				this.choice = "价格升序"
-				this.orderBy = "price"
-				this.order = "asc"
+				this.queryObj.orderBy = "cost"
+				this.queryObj.isAsc = true
 				this.$refs.popup.close('top')
+				this.resetParam()
+				this.orderList()
 			},
-			list() {
-
+			async orderList(cb) {
+				
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/order/getOrderList', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.total = res.data.data.totalCount
+			},
+			resetParam() {
+				//重置关键数据
+				this.queryObj.page = 1
+				this.total = 0
+				this.isLoading = false
+				this.list = []
 			}
-		}
+		},
+		onReachBottom() {
+			if (this.queryObj.page * this.queryObj.size >= this.total) return uni.$showMsg('数据加载完毕')
+			if (this.isLoading) return
+			
+			this.queryObj.page++;
+			this.orderList()
+		},
+		onPullDownRefresh() {
+			
+			this.resetParam()
+			this.orderList(() => uni.stopPullDownRefresh())
+			
+			
+		},
+		
 	}
 </script>
 

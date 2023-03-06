@@ -32,7 +32,7 @@
 		},
 		onLoad(options) {
 			console.log(options)
-			this.$refs.order.getOrder()
+			this.$refs.order.getOrder(options.orderId)
 		}
 	}
 </script>

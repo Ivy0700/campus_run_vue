@@ -2,13 +2,14 @@
 	<view>
 		<view>
 			<view class="top-section">
-				<text class="first" @click="clickItem(1)" :class="curIndex === 1 ? 'active': ''">跑腿中</text>
-				<text class="second" @click="clickItem(2)" :class="curIndex === 2 ? 'active': ''">已完成</text>
-				<text class="fourth" @click="clickItem(3)" :class="curIndex === 3 ? 'active': ''">已取消</text>
+				<text class="first" @click="clickItem('ONGOING')" :class="curChoice === 'ONGOING' ? 'active': ''">跑腿中</text>
+				<text class="second" @click="clickItem('DELIVERED')" :class="curChoice === 'DELIVERED' ? 'active': ''">已送达</text>
+				<text class="third" @click="clickItem('GET_REVIEWED')" :class="curChoice === 'GET_REVIEWED' ? 'active': ''">已收到评价</text>
+				<text class="fourth" @click="clickItem('CANCELED')" :class="curChoice === 'CANCELED' ? 'active': ''">已取消</text>
 			</view>
 
 			<block v-for="(order, i) in list" :key="i" v-if="list.length !== 0">
-				<my-ordercard :order="order" :choice="cardChoice"></my-ordercard>
+				<my-ordercard :order="order" :choice="cardChoice" @getErrandList="clickItem(curChoice)"></my-ordercard>
 			</block>
 			<view class="empty-section" v-if="list.length === 0">
 				<image class="empty-img" mode="widthFix"
@@ -21,19 +22,75 @@
 
 <script>
 	export default {
+		onLoad() {
+			this.clickItem('ONGOING')
+		},
+		onShow() {
+			console.log("onShow:")
+			const statusChanged = uni.getStorageSync("statusChanged");
+			console.log(statusChanged)
+			if (statusChanged) {
+				this.resetParam()
+				this.clickItem(this.curChoice)
+			}
+			uni.removeStorageSync("statusChanged")
+		},
 		data() {
 			return {
 				list: [],
 				cardChoice: "errand",
-				curIndex: 1
+				curChoice: "ONGOING",
+				queryObj: {
+					page: 1,
+					size: 10
+				},
+				total: 0,
+				isLoading: false,
 			};
 		},
 		methods: {
-			clickItem(index) {
-				this.curIndex = index
+			clickItem(cur) {
+				this.resetParam()
+				this.curChoice = cur
+				this.queryObj.status = this.curChoice
+				this.getErrandList()
 			},
+			async getErrandList(cb) {
+				console.log("我被调用了")
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/errand/getErrandByStatus', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.total = res.data.data.totalCount
+			},
+			resetParam() {
+				//重置关键数据
+				this.queryObj.page = 1
+				this.total = 0
+				this.isLoading = false
+				this.list = []
+			}
 
-		}
+		},
+		onReachBottom() {
+			if (this.queryObj.page * this.queryObj.size >= this.total) return uni.$showMsg('数据加载完毕')
+			if (this.isLoading) return
+			
+			this.queryObj.page++;
+			this.getErrandList()
+		},
+		onPullDownRefresh() {
+			
+			this.resetParam()
+			this.getErrandList(() => uni.stopPullDownRefresh())
+			
+			
+		},
 	}
 </script>
 

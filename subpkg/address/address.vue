@@ -7,14 +7,14 @@
 			<block v-for="(address, i) in list" :key="i" v-if="list.length !== 0">
 
 				<view class="address-card" @click="choose(address)">
-					<text class="close">×</text>
+					<text class="close" @click="deleteAddress(address.id)">×</text>
 					<view class="address-info">
 						<text class="startingPoint">{{address.startingPoint}}</text>
 						<text class="arrow">→</text>
 						<text class="destination">{{address.destination}}</text>
 					</view>
 					<view class="user-info">
-						<text class="receiver">{{address.receiver}}</text>
+						<text class="receiver">{{address.name}}</text>
 						<text class="phoneNum">{{address.phoneNum}}</text>
 					</view>
 
@@ -39,54 +39,75 @@
 			if (options.canClick !== undefined) {
 				this.canClick = options.canClick
 			}
+			this.getAddressList()
+		},
+		onShow() {
+			this.getAddressList()
 		},
 		data() {
 			return {
 				canClick: false,
-				list: [{
-						id: '1',
-						startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
-						// startingPoint: '图书馆',
-						destination: '图书馆',
-						isDefault: false,
-						receiver: '张三',
-						phoneNum: '13212345678'
-					},
-					{
-						id: '1',
-						startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
-						// startingPoint: '图书馆',
-						destination: '图书馆',
-						isDefault: false,
-						receiver: '张三',
-						phoneNum: '13212345678'
-					},
-					{
-						id: '1',
-						startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
-						// startingPoint: '图书馆',
-						destination: '图书馆',
-						isDefault: false,
-						receiver: '张三',
-						phoneNum: '13212345678'
-					},
-					{
-						id: '1',
-						startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
-						// startingPoint: '图书馆',
-						destination: '图书馆',
-						isDefault: false,
-						receiver: '张三',
-						phoneNum: '13212345678'
-					}
+				list: [
+					// {
+					// 	id: '1',
+					// 	startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
+					// 	// startingPoint: '图书馆',
+					// 	destination: '图书馆',
+					// 	isDefault: false,
+					// 	name: '张三',
+					// 	phoneNum: '13212345678'
+					// },
+					// {
+					// 	id: '1',
+					// 	startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
+					// 	// startingPoint: '图书馆',
+					// 	destination: '图书馆',
+					// 	isDefault: false,
+					// 	name: '张三',
+					// 	phoneNum: '13212345678'
+					// },
+					// {
+					// 	id: '1',
+					// 	startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
+					// 	// startingPoint: '图书馆',
+					// 	destination: '图书馆',
+					// 	isDefault: false,
+					// 	name: '张三',
+					// 	phoneNum: '13212345678'
+					// },
+					// {
+					// 	id: '1',
+					// 	startingPoint: '广东省深圳市龙岗区坂田街道万科第五园',
+					// 	// startingPoint: '图书馆',
+					// 	destination: '图书馆',
+					// 	isDefault: false,
+					// 	name: '张三',
+					// 	phoneNum: '13212345678'
+					// }
 				]
 				// address: 
 			};
 		},
 		methods: {
-			clickHandler(address) {
+			async clickHandler(address) {
 
-				address.isDefault = !address.isDefault
+				const choice = !address.isDefault
+				const isDefault = choice ? "1" : "0"
+				const queryObj = {
+					"id": address.id,
+					"phoneNum": address.phoneNum,
+					"startingPoint": address.startingPoint,
+					"destination": address.destination,
+					"name": address.name,
+					"isDefault": isDefault
+				}
+				const {data : res} = await uni.$http.post('/api/address/saveAddress', queryObj)
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				
+				this.getAddressList()
 
 			},
 			updateClick(id) {
@@ -108,6 +129,22 @@
 						delta: 1
 					})
 				}
+			},
+			async getAddressList() {
+				const {data : res} = await uni.$http.post('/api/address/getAddressList')
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list =  res.data.data
+			},
+			async deleteAddress(id) {
+				const {data : res} = await uni.$http.post('/api/address/deleteAddress', {"id": id})
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.getAddressList()
 			}
 			// click() {
 			// 	let pages = getCurrentPages()

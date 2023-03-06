@@ -2,21 +2,22 @@
 	<view class="review-card">
 		<view class="first-line">
 			<view class="info"  @click.stop="goToChat(info.openid)"  >
-				<image class="avatar" :src="info.avatar"></image>
-				<text class="nickname">{{info.nickname}}</text>
+				<image class="avatar" :src="info.userDTO.headPortrait"></image>
+				<text class="nickname">{{info.userDTO.username}}</text>
 			</view>
-			<text class="time">{{info.postTime}}</text>
+			<text class="time">{{getTime}}</text>
 		</view>
 		<view class="second-line" @click="goToPost">
-			<text class="detail">【{{info.title}}】{{info.content}}</text>
+			<text class="detail">【{{info.orderTitle}}】{{info.orderContent}}</text>
 		</view>
 		<view class="third-line">
-			<text class="review">{{info.review}}</text>
+			<text class="review">{{info.content}}</text>
 		</view>
 	</view>
 </template>
 
 <script>
+	import dateTool from '../../tools/date_tool.js';
 	export default {
 		name:"my-review",
 		props: {
@@ -24,6 +25,12 @@
 				type: Object,
 				default: {}
 			}
+		},
+		computed: {
+			getTime() {
+				
+				return dateTool.getPostTime(this.info.updateTime)
+			},
 		},
 		data() {
 			return {
@@ -41,7 +48,7 @@
 			},
 			goToPost() {
 				uni.navigateTo({
-					url: '/subpkg/order_detail/order_detail?orderId=' + this.info.orderId
+					url: '/subpkg/order_detail/order_detail?id=' + this.info.orderId
 				})
 			}
 		}

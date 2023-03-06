@@ -5,7 +5,7 @@
 
 				<text class="receiver" id="receiver">收货人</text>
 				<view class="first-input">
-					<uni-easyinput placeholder="请输入收货人名字" :inputBorder="false" v-model="address.receiver" :clearable="false"></uni-easyinput>
+					<uni-easyinput placeholder="请输入收货人名字" :inputBorder="false" v-model="address.name" :clearable="false"></uni-easyinput>
 				</view>
 
 			</view>
@@ -28,7 +28,7 @@
 				</view>
 			</view>
 			<view class="fifth-line">
-				<radio :checked="isDefault" color="#5500ff" v-show="true" @click="clickHandler"></radio>
+				<radio :checked="address.isDefault" color="#5500ff" v-show="true" @click="clickHandler"></radio>
 				<text class="default-text">设置为默认地址</text>
 			</view>
 		</view>
@@ -44,28 +44,100 @@
 		onLoad(options) {
 
 			if (options.id !== undefined && options.id !== null) {
-				this.address = {
-					"receiver" : "张三",
-					"phoneNum": "123",
-					"startingPoint": "西六",
-					"destination": "图书馆"
-				}
+				// this.address = {
+				// 	"name" : "张三",
+				// 	"phoneNum": "123",
+				// 	"startingPoint": "西六",
+				// 	"destination": "图书馆"
+				// }
+				this.getAddressById(options.id)
 			} else {
 				console.log("啥也没有")
 			}
 		},
 		data() {
 			return {
-				isDefault: false,
 				address: {}
 			};
 		},
 		methods: {
-			addClick() {
-
+			checkParam() {
+				const queryObj = this.address
+				
+				if (queryObj == undefined || queryObj == null) {
+					return uni.$showMsg("参数不能为空")
+				}
+				if (queryObj.name == undefined || queryObj.name == null || queryObj.name == "") {
+					return uni.$showMsg("收件人名字不能为空")
+				}
+				if (queryObj.phoneNum == undefined || queryObj.phoneNum == null || queryObj.phoneNum == "") {
+					return uni.$showMsg("手机号码不能为空")
+				}
+				if (queryObj.startingPoint == undefined || queryObj.startingPoint == null || queryObj.startingPoint == "") {
+					return uni.$showMsg("起点不能为空")
+				}
+				if (queryObj.destination == undefined || queryObj.destination == null || queryObj.destination == "") {
+					return uni.$showMsg("终点不能为空")
+				}
+				
+			},
+			async addClick() {
+				const queryObj = this.address
+				const name = queryObj.name
+				const phoneNum = queryObj.phoneNum
+				const startingPoint = queryObj.startingPoint
+				const destination = queryObj.destination
+				//手机号正则
+				const regx = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/
+				if (queryObj == undefined || queryObj == null) {
+					return uni.$showMsg("参数不能为空")
+				}
+				if (name == undefined || name == null || name == "") {
+					return uni.$showMsg("收件人名字不能为空")
+				}
+				if (name.length > 20) {
+					return uni.$showMsg("名字长度不能大于20")
+				}
+				if (phoneNum == undefined ||phoneNum == null ||phoneNum == "") {
+					return uni.$showMsg("手机号码不能为空")
+				}
+				if (!regx.test(phoneNum)) {
+					return uni.$showMsg("请输入正确的手机号码")
+				}
+				if (startingPoint == undefined || startingPoint == null || startingPoint == "") {
+					return uni.$showMsg("起点不能为空")
+				}
+				if (startingPoint.length > 20) {
+					return uni.$showMsg("起点长度不能大于20")
+				}
+				if (destination == undefined || destination == null || destination == "") {
+					return uni.$showMsg("终点不能为空")
+				}
+				if (destination.length > 20) {
+					return uni.$showMsg("终点长度不能大于20")
+				}
+				
+				queryObj.isDefault = this.address.isDefault ? 1:0
+				const {data : res} = await uni.$http.post('/api/address/saveAddress', queryObj)
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				uni.navigateBack()
 			},
 			clickHandler() {
-				this.isDefault = !this.isDefault
+				this.address.isDefault = !this.address.isDefault
+			},
+			async getAddressById(id) {
+				const {data : res} = await uni.$http.get('/api/address/getAddress/' + id)
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				const addr =  res.data.data
+				this.address = addr
+				this.address.isDefault = addr.isDefault == 1
+				
 			}
 		}
 	}

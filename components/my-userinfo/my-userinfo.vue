@@ -1,51 +1,54 @@
 <template>
 	<view>
-		<view class="userinfo">
-			<image :src="userinfo.avatar" class="avatar"></image>
-			<text class="nickname">{{userinfo.nickname}}</text>
-		</view>
-
-		<view class="middle-card">
-			<navigator class="first" url="../../subpkg/orderlist/orderlist">
-				<image class="first-image" src="/static/my-icon/shopping-cart.png"></image>
-				<text class="first-text">订单</text>
-			</navigator>
-			<navigator class="second" url="../../subpkg/errandlist/errandlist">
-				<image class="second-image" src="/static/my-icon/note.png"></image>
-				<text class="second-text">接单</text>
-			</navigator>
-			<navigator class="third" url="../../subpkg/review/review">
-				<image class="third-image" src="../../static/my-icon/comment.png"></image>
-				<text class="third-text">评价</text>
-			</navigator>
-			<navigator class="fourth" url="../../subpkg/address/address">
-				<image class="fourth-image" src="../../static/my-icon/address.png"></image>
-				<text class="fourth-text">地址管理</text>
-			</navigator>
-		</view>
-
-		<view class="choice">
-			<view class="left-section" @click="clickLeft" :style="{color: leftColor}">
-				<text class="left">订单</text>
-				<text class="left-num">{{orderNum}}</text>
-			</view>
-			<view class="right-section" @click="clickRight" :style="{color: rightColor}">
-				<text class="right">接单</text>
-				<text class="right-num">{{errandNum}}</text>
+		<view class="top-section">
+			<view class="userinfo">
+				<image :src="userinfo.avatar" class="avatar"></image>
+				<text class="nickname">{{userinfo.nickname}}</text>
 			</view>
 
-		</view>
+			<view class="middle-card">
+				<navigator class="first" url="../../subpkg/orderlist/orderlist">
+					<image class="first-image" src="/static/my-icon/shopping-cart.png"></image>
+					<text class="first-text">订单</text>
+				</navigator>
+				<navigator class="second" url="../../subpkg/errandlist/errandlist">
+					<image class="second-image" src="/static/my-icon/note.png"></image>
+					<text class="second-text">接单</text>
+				</navigator>
+				<navigator class="third" url="../../subpkg/review/review">
+					<image class="third-image" src="../../static/my-icon/comment.png"></image>
+					<text class="third-text">评价</text>
+				</navigator>
+				<navigator class="fourth" url="../../subpkg/address/address">
+					<image class="fourth-image" src="../../static/my-icon/address.png"></image>
+					<text class="fourth-text">地址管理</text>
+				</navigator>
+			</view>
 
-		<!-- 跑腿需求列表 -->
-		<block v-for="(order, i) in list" :key="i" v-if="list.length !== 0">
-			<my-ordercard :order="order" :choice="choice"></my-ordercard>
-		</block>
-		<view class="empty-section" v-if="list.length === 0">
-			<image class="empty-img" mode="widthFix" src="https://img.icons8.com/stickers/100/null/list-is-empty.png">
-			</image>
-			<text class="empty-text">您还没有相关的订单</text>
-		</view>
+			<view class="choice">
+				<view class="left-section" @click="clickLeft" :style="{color: leftColor}">
+					<text class="left">订单</text>
+					<text class="left-num">{{orderNum}}</text>
+				</view>
+				<view class="right-section" @click="clickRight" :style="{color: rightColor}">
+					<text class="right">接单</text>
+					<text class="right-num">{{errandNum}}</text>
+				</view>
 
+			</view>
+		</view>
+		<view class="bottom-section">
+			<!-- 跑腿需求列表 -->
+			<block v-for="(order, i) in list" :key="i" v-if="list.length !== 0">
+				<my-ordercard :order="order" :choice="choice"  @getErrandList="getErrandList" @getOrderList="getOrderList"></my-ordercard>
+			</block>
+			<view class="empty-section" v-if="list.length === 0">
+				<image class="empty-img" mode="widthFix"
+					src="https://img.icons8.com/stickers/100/null/list-is-empty.png">
+				</image>
+				<text class="empty-text">您还没有相关的订单</text>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -82,7 +85,13 @@
 				rightColor: 'black',
 				orderNum: 0,
 				errandNum: 0,
-				choice: '',
+				choice: 'order',
+				queryObj: {
+					page: 1,
+					size: 5
+				},
+				total: 0,
+				isLoading: false
 			};
 		},
 		methods: {
@@ -90,47 +99,151 @@
 				this.leftColor = '#0000ff'
 				this.rightColor = 'black'
 				this.choice = 'order'
-				this.list = [{
-						"status": "待评价",
-						"updateTime": "10-01 11:59",
-						"title": "求帮忙",
-						"content": "1233333333333333333333asdddddddddddddddddddd",
-						"orderId": "1234"
-					},
-					{
-						"status": "已评价",
-						"updateTime": "10-01 11:59",
-						"title": "求帮忙",
-						"content": "1233333333333333333333asdddddddddddddddddddd",
-						"orderId": "1234"
-					}
-				]
+				// this.list = [{
+				// 		"status": "待评价",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"orderId": "1234"
+				// 	},
+				// 	{
+				// 		"status": "已评价",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"orderId": "1234"
+				// 	},
+				// 	{
+				// 		"status": "已评价",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"orderId": "1234"
+				// 	},
+				// 	{
+				// 		"status": "已评价",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"orderId": "1234"
+				// 	}
+				// ]
+				this.resetParam()
+				this.getOrderList()
+			},
+			refresh() {
+				if (this.choice === 'order') {
+					this.clickLeft()
+					this.getErrandNum()
+				} else if (this.choice === 'errand') {
+					this.clickRight()
+					this.getOrderNum()
+				}
 			},
 			clickRight() {
 				this.leftColor = 'black'
 				this.rightColor = '#0000ff'
 				this.choice = 'errand'
-				this.list = [{
-						"status": "已完成",
-						"updateTime": "10-01 11:59",
-						"title": "求帮忙",
-						"content": "1233333333333333333333asdddddddddddddddddddd",
-						"errandId": "1245"
-					},
-					{
-						"status": "正在跑腿中",
-						"updateTime": "10-01 11:59",
-						"title": "求帮忙",
-						"content": "1233333333333333333333asdddddddddddddddddddd",
-						"errandId": "1245"
-					}
-				]
-			}
-		}
+				this.resetParam()
+				// this.list = [{
+				// 		"status": "已完成",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"errandId": "1245"
+				// 	},
+				// 	{
+				// 		"status": "正在跑腿中",
+				// 		"updateTime": "10-01 11:59",
+				// 		"title": "求帮忙",
+				// 		"content": "1233333333333333333333asdddddddddddddddddddd",
+				// 		"errandId": "1245"
+				// 	}
+				// ]
+				this.getErrandList()
+			},
+			async getOrderList(cb) {
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/order/getMyOrder', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.orderNum = res.data.data.totalCount
+				// this.orderNum = this.list.total
+			},
+			async getErrandList(cb) {
+				this.isLoading = true
+				const {data : res} = await uni.$http.post('/api/errand/getMyErrand', this.queryObj)
+				this.isLoading = false
+				console.log(res);
+				cb && cb()
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.list = [...this.list, ...res.data.data.list]
+				this.errandNum = res.data.data.totalCount
+				// this.errandNum = this.list.total
+			},
+			async getErrandNum() {
+				const {data : res} = await uni.$http.get('/api/errand/getErrandNum')
+				console.log(res);
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.errandNum = res.data.data
+			},
+			async getOrderNum() {
+				const {data : res} = await uni.$http.get('/api/order/getOrderNum')
+				console.log(res);
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				this.orderNUm = res.data.data
+			},
+			resetParam() {
+				//重置关键数据
+				this.queryObj.page = 1
+				// this.total = 0
+				this.isLoading = false
+				this.list = []
+			},
+			updateChoice (choice) {
+				this.choice = choice
+			},
+			reachBottom() {
+				console.log(this.choice)
+				if (this.choice === 'order') {
+					if (this.queryObj.page * this.queryObj.size >= this.orderNum) return uni.$showMsg('数据加载完毕')
+					if (this.isLoading) return
+					
+					this.queryObj.page++;
+					this.getOrderList()
+				}
+				if (this.choice === 'errand') {
+					if (this.queryObj.page * this.queryObj.size >= this.errandNum) return uni.$showMsg('数据加载完毕')
+					if (this.isLoading) return
+					
+					this.queryObj.page++;
+					this.getErrandList()
+				}
+				
+			},
+			
+		},
+		
 	}
 </script>
 
 <style lang="scss">
+	.top-section {
+		// position: fixed;
+		// z-index: 999;
+	}
+	
 	.userinfo {
 		height: 350rpx;
 

@@ -1,4 +1,6 @@
 {
+  "onReachBottomDistance": 150,
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "my-search": "/components/my-search/my-search",
     "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",

@@ -1,11 +1,11 @@
 <template>
-	<view class="post-container" @click="goToDetail(post.orderId)">
+	<view class="post-container" @click="goToDetail(post.id)">
 		<view class="poster-info" >
 			<view class="info"  @click.stop="goToChat(post.openid)"  >
-				<image class="avatar" :src="post.avatar"></image>
-				<text class="nickname">{{post.nickname}}</text>
+				<image class="avatar" :src="post.employerHeadPortrait"></image>
+				<text class="nickname">{{post.employerName}}</text>
 			</view>
-			<text class="post-time">{{post.postTime}}</text>
+			<text class="post-time">{{getTime}}</text>
 		</view>
 
 		<view class="post-content">
@@ -16,31 +16,32 @@
 		<view class="post-info">
 			<view class="address">
 				<image class="img-address" src="/static/home-icon/address.png"></image>
-				<text class="text-address">{{post.address}}</text>
+				<text class="text-address">{{post.destination}}</text>
 			</view>
 
 			<view class="specific-info">
 				<view class="cost">
 					<image class="img-cost" src="../../static/home-icon/yuan.png"></image>
 					<view class="money">
-						<text class="currency">￥</text>
+						<!-- <text class="currency">￥</text> -->
 						<text class="text-cost">{{post.cost}}</text>
 					</view>
 				</view>
-				<view class="expectedTime">
+				<!-- <view class="expectedTime">
 					<image class="img-expectedTime" src="../../static/home-icon/clock.png"></image>
 					<view class="time">
 						<text class="expectedStartTime">{{post.expectedStartTime}}</text>
 						<text class="time-line">~</text>
 						<text class="expectedEndTime">{{post.expectedEndTime}}</text>
 					</view>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import dateTool from '../../tools/date_tool.js';
 	export default {
 		name: "my-post",
 		props: {
@@ -64,12 +65,18 @@
 				})
 				
 			},
-			goToDetail(orderId) {
+			goToDetail(id) {
 				
 				uni.navigateTo({
-					url: '/subpkg/order_detail/order_detail?orderId=' + orderId
+					url: '/subpkg/order_detail/order_detail?id=' + id
 				})
 				
+			}
+		},
+		computed: {
+			getTime() {
+				
+				return dateTool.getPostTime(this.post.createTime)
 			}
 		}
 	}
@@ -123,6 +130,7 @@
 			.post-time {
 				font-size: 13px;
 				color: gray;
+				padding-right: 20rpx;
 			}
 
 		}
@@ -180,6 +188,7 @@
 			.specific-info {
 
 				align-items: center;
+				padding-right: 20rpx;
 
 				.cost {
 					display: flex;
@@ -189,12 +198,13 @@
 						width: 40rpx;
 						height: 40rpx;
 						border-radius: 45px;
+						padding-right: 10rpx;
 					}
 
 					.money {
-						.currency {
-							font-size: 13px;
-						}
+						// .currency {
+						// 	font-size: 13px;
+						// }
 
 						.text-cost {
 							font-size: 13px;

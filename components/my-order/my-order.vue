@@ -9,7 +9,7 @@
 				<view class="address-info-box" v-else @click="chooseAddress">
 					<view class="row1">
 						<view class="row1-left">
-							<view class="receiver">收货人: {{address.receiver}}</view>
+							<view class="receiver">收货人: {{address.name}}</view>
 						</view>
 						<view class="row1-right">
 							<view class="phone">电话：{{address.phoneNum}}</view>
@@ -50,7 +50,7 @@
 			
 			<!--  发布按钮 -->
 			<view class="btn">
-				<button type="primary" style="width: 70%;color:white; background-color: blue;">发布</button>
+				<button type="primary" style="width: 70%;color:white; background-color: blue;" @click="saveOrder">发布</button>
 			</view> 
 		</view>
 	</view>
@@ -72,7 +72,8 @@
 				// },
 				title: '',
 				cost: '',
-				content: ''
+				content: '',
+				id: null
 			};
 		},
 		props: {
@@ -91,13 +92,70 @@
 			updateAddr(addr) {
 				this.address = addr
 			},
-			getOrder() {
-				this.address = {
-					"receiver": '测试'
-				},
-				this.title = '求帮忙'
-				this.cost = 3
-				this.content = 'rt'
+			async getOrder(id) {
+				const {
+					data: res
+				} = await uni.$http.get('/order/getOrder/' + id)
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				
+				if (res.data.data != null && res.data.data != undefined) {
+					// this.info = res.data.data
+					const info = res.data.data
+					this.address = {
+						name: info.name,
+						phoneNum: info.phoneNum,
+						startingPoint: info.startingPoint,
+						destination: info.destination
+					}
+					this.title = info.title
+					this.content = info.content
+					this.cost = info.cost	
+					this.id = info.id
+				}
+			},
+			async saveOrder() {
+				const reg = /^[0-9]+(.[0-9]{1,3})?$/
+				if (this.address == undefined || this.address == null || JSON.stringify(this.address) === '{}') {
+					return uni.$showMsg("地址不能为空")
+				}
+				if (this.title === "" || this.title === undefined || this.title === null) {
+					return uni.$showMsg("标题不能为空")
+				}
+				if (this.title.length > 30) {
+					return uni.$showMsg("标题长度不能超过30个字")
+				}
+				if (this.cost === "" || this.cost === undefined || this.cost === null) {
+					return uni.$showMsg("预期费用不能为空")
+				}
+				if (!reg.test(this.cost)) {
+					return uni.$showMsg("请输入正确的数字，小数最多三位")
+				}
+				
+				if (this.content === "" || this.content === undefined || this.content === null) {
+					return uni.$showMsg("内容不能为空")
+				}
+				const queryObj = {
+					title: this.title, 
+					content: this.content,
+					cost: this.cost,
+					startingPoint: this.address.startingPoint,
+					destination: this.address.destination,
+					phoneNum: this.address.phoneNum,
+					name: this.address.name,
+					id: this.id
+				}
+				const {
+					data: res
+				} = await uni.$http.post('/api/order/save', queryObj)
+				console.log(res)
+				if (res.code !== 20000) {
+					return uni.$showMsg()
+				}
+				return uni.$showMsg("发布成功")
+				
 			}
 		},
 		watch: {

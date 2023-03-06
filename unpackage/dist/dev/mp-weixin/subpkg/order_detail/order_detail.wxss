@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 水平间距 */
 /* 水平间距 */
+.container {
+  padding-bottom: 100rpx;
+}
 .userinfo {
   margin-left: 10rpx;
   margin-right: 10rpx;
@@ -104,8 +107,7 @@
   font-weight: 540;
 }
 .bottom-button {
-  position: -webkit-sticky;
-  position: sticky;
+  position: fixed;
   bottom: 0;
   z-index: 999;
   width: 100%;
