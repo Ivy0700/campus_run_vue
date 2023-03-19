@@ -12,7 +12,7 @@
 
 			<my-search @click="gotoSearch" :bgcolor="'#ffffff'"></my-search>
 
-			<navigator class="img-chat" url="../../subpkg/chat/chat">
+			<navigator class="img-chat" url="../../subpkg/chat_list/chat_list">
 				<image class="chat" src="../../static/home-icon/chat.png" mode="aspectFit"></image>
 			</navigator>
 		</view>

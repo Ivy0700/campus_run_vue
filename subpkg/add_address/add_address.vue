@@ -5,26 +5,30 @@
 
 				<text class="receiver" id="receiver">收货人</text>
 				<view class="first-input">
-					<uni-easyinput placeholder="请输入收货人名字" :inputBorder="false" v-model="address.name" :clearable="false"></uni-easyinput>
+					<uni-easyinput placeholder="请输入收货人名字" :inputBorder="false" v-model="address.name"
+						:clearable="false"></uni-easyinput>
 				</view>
 
 			</view>
 			<view class="second-line">
 				<text class="phoneNum">手机号码</text>
 				<view class="second-input">
-					<uni-easyinput type="number" placeholder="请输入收货人手机号码" :inputBorder="false" v-model="address.phoneNum" :clearable="false"></uni-easyinput>
+					<uni-easyinput type="number" placeholder="请输入收货人手机号码" :inputBorder="false"
+						v-model="address.phoneNum" :clearable="false"></uni-easyinput>
 				</view>
 			</view>
 			<view class="third-line">
 				<text class="startingPoint">起点</text>
 				<view class="third-input">
-					<uni-easyinput placeholder="请输入起点" :inputBorder="false" v-model="address.startingPoint" :clearable="false"></uni-easyinput>
+					<uni-easyinput placeholder="请输入起点" :inputBorder="false" v-model="address.startingPoint"
+						:clearable="false"></uni-easyinput>
 				</view>
 			</view>
 			<view class="fourth-line">
 				<text class="destination">终点</text>
 				<view class="fourth-input">
-					<uni-easyinput placeholder="请输入终点" :inputBorder="false" v-model="address.destination" :clearable="false"></uni-easyinput>
+					<uni-easyinput placeholder="请输入终点" :inputBorder="false" v-model="address.destination"
+						:clearable="false"></uni-easyinput>
 				</view>
 			</view>
 			<view class="fifth-line">
@@ -63,7 +67,7 @@
 		methods: {
 			checkParam() {
 				const queryObj = this.address
-				
+
 				if (queryObj == undefined || queryObj == null) {
 					return uni.$showMsg("参数不能为空")
 				}
@@ -73,13 +77,14 @@
 				if (queryObj.phoneNum == undefined || queryObj.phoneNum == null || queryObj.phoneNum == "") {
 					return uni.$showMsg("手机号码不能为空")
 				}
-				if (queryObj.startingPoint == undefined || queryObj.startingPoint == null || queryObj.startingPoint == "") {
+				if (queryObj.startingPoint == undefined || queryObj.startingPoint == null || queryObj.startingPoint ==
+					"") {
 					return uni.$showMsg("起点不能为空")
 				}
 				if (queryObj.destination == undefined || queryObj.destination == null || queryObj.destination == "") {
 					return uni.$showMsg("终点不能为空")
 				}
-				
+
 			},
 			async addClick() {
 				const queryObj = this.address
@@ -98,7 +103,7 @@
 				if (name.length > 20) {
 					return uni.$showMsg("名字长度不能大于20")
 				}
-				if (phoneNum == undefined ||phoneNum == null ||phoneNum == "") {
+				if (phoneNum == undefined || phoneNum == null || phoneNum == "") {
 					return uni.$showMsg("手机号码不能为空")
 				}
 				if (!regx.test(phoneNum)) {
@@ -116,9 +121,11 @@
 				if (destination.length > 20) {
 					return uni.$showMsg("终点长度不能大于20")
 				}
-				
-				queryObj.isDefault = this.address.isDefault ? 1:0
-				const {data : res} = await uni.$http.post('/api/address/saveAddress', queryObj)
+
+				queryObj.isDefault = this.address.isDefault ? 1 : 0
+				const {
+					data: res
+				} = await uni.$http.post('/api/address/saveAddress', queryObj)
 				console.log(res)
 				if (res.code !== 20000) {
 					return uni.$showMsg()
@@ -129,15 +136,17 @@
 				this.address.isDefault = !this.address.isDefault
 			},
 			async getAddressById(id) {
-				const {data : res} = await uni.$http.get('/api/address/getAddress/' + id)
+				const {
+					data: res
+				} = await uni.$http.get('/api/address/getAddress/' + id)
 				console.log(res)
 				if (res.code !== 20000) {
 					return uni.$showMsg()
 				}
-				const addr =  res.data.data
+				const addr = res.data.data
 				this.address = addr
 				this.address.isDefault = addr.isDefault == 1
-				
+
 			}
 		}
 	}
@@ -169,6 +178,7 @@
 				justify-content: center;
 			}
 		}
+
 		// .first-input::after{
 		// 	content: ' ';
 		// 	width: 90%;
@@ -237,6 +247,7 @@
 			padding-left: 20rpx;
 			align-items: center;
 			display: flex;
+
 			.default-text {
 				font-size: 15px;
 				padding-left: 15rpx;

@@ -165,136 +165,94 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 51));
 var _toConsumableArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toConsumableArray */ 18));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 53));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date_tool.js */ 68));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _user = _interopRequireDefault(__webpack_require__(/*! ../../store/user */ 35));
+var _vuex = __webpack_require__(/*! vuex */ 34);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
-  onLoad: function onLoad() {
-    this.nextPage();
+  computed: _objectSpread({}, (0, _vuex.mapState)('m_user', ['token', 'userinfo'])),
+  onLoad: function onLoad(options) {
+    this.queryObj.inboxHash = options.inboxHash;
+    //	this.nextPage()
     var height = uni.getWindowInfo().windowHeight;
     console.log(height);
-    var msgs = [{
-      "id": "1",
-      "userId": "1",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/avatar.jpg',
-      "message": 'https://img2020.cnblogs.com/blog/2543831/202112/2543831-20211208111755384-1390104080.png',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 6
-    }, {
-      "id": "2",
-      "userId": "2",
-      "imgUrl": "../../static/example/avatar.jpg",
-      "message": '咋说呢',
-      "type": 0,
-      "time": new Date() - 1000 * 60 * 7
-    }, {
-      "id": "3",
-      "userId": "1",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/example.jpg',
-      "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 60 * 24
-    }, {
-      "id": "4",
-      "userId": "2",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/example.jpg',
-      "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2
-    }, {
-      "id": "5",
-      "userId": "1",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/example.jpg',
-      "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
-    }, {
-      "id": "6",
-      "userId": "2",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/example.jpg',
-      "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
-    }, {
-      "id": "7",
-      "userId": "2",
-      "imgUrl": "../../static/example/avatar.jpg",
-      // "message": '../../static/example/example.jpg',
-      "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-      "type": 1,
-      "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
-    }];
-    this.getMsg(1, msgs);
+    // let msgs = [{
+    // 		"id": "1",
+    // 		"userId": "1",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/avatar.jpg',
+    // 		"message": 'https://img2020.cnblogs.com/blog/2543831/202112/2543831-20211208111755384-1390104080.png',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 6
+    // 	},
+    // 	{
+    // 		"id": "2",
+    // 		"userId": "2",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		"message": '咋说呢',
+    // 		"type": 0,
+    // 		"time": new Date() - 1000 * 60 * 7
+    // 	},
+    // 	{
+    // 		"id": "3",
+    // 		"userId": "1",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/example.jpg',
+    // 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 60 * 24
+    // 	},
+    // 	{
+    // 		"id": "4",
+    // 		"userId": "2",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/example.jpg',
+    // 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2
+    // 	},
+    // 	{
+    // 		"id": "5",
+    // 		"userId": "1",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/example.jpg',
+    // 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
+    // 	},
+    // 	{
+    // 		"id": "6",
+    // 		"userId": "2",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/example.jpg',
+    // 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
+    // 	},
+    // 	{
+    // 		"id": "7",
+    // 		"userId": "2",
+    // 		"imgUrl": "../../static/example/avatar.jpg",
+    // 		// "message": '../../static/example/example.jpg',
+    // 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+    // 		"type": 1,
+    // 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2
+    // 	}
+    // ]
+    //this.getMsg(1, msgs)
+    this.getChatRecords();
     this.windowHeight = height;
     this.connectSocket();
   },
   onUnload: function onUnload() {
     this.isUnLoad = true;
     clearInterval(this.reconnectTimer);
+    clearInterval(this.timer);
     this.closeSocket();
   },
   data: function data() {
@@ -377,12 +335,55 @@ var _default = {
       reconnectTimer: '',
       socketOpen: false,
       isUnLoad: false,
-      maxTaskCount: 5
+      maxTaskCount: 5,
+      queryObj: {
+        page: 1,
+        size: 8,
+        inboxHash: ''
+      },
+      total: 0
     };
   },
   methods: {
+    getChatRecords: function getChatRecords() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var _yield$uni$$http$get, res, msg;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _this.isLoading = true;
+                _context.next = 3;
+                return uni.$http.get('/api/chat-record/getChatRecord', _this.queryObj);
+              case 3:
+                _yield$uni$$http$get = _context.sent;
+                res = _yield$uni$$http$get.data;
+                _this.isLoading = false;
+                console.log(res);
+                if (!(res.code !== 20000)) {
+                  _context.next = 9;
+                  break;
+                }
+                return _context.abrupt("return", uni.$showMsg());
+              case 9:
+                //this.list = [...this.list, ...res.data.data.list]
+                msg = res.data.data.list;
+                console.log(JSON.stringify(msg));
+                _this.total = res.data.data.totalCount;
+                _this.isLoading = false;
+                _this.getMsg(msg);
+              case 14:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     //获取聊天数据
-    getMsg: function getMsg(page, messages) {
+    getMsg: function getMsg(messages) {
+      //clearInterval(this.loading)
       var msgsArr = messages;
       msgsArr.reverse();
       // this.imgMsg = this.msgs.filter(function(msg) {
@@ -395,29 +396,29 @@ var _default = {
       var oldTime = '';
       //处理时间
       if (msgsArr.length !== 0) {
-        oldTime = msgsArr[0].time;
+        oldTime = msgsArr[0].createTime;
       } else {
         return;
       }
       msgsArr.forEach(function (item, index) {
-        // let temp = item.time
+        var temp = item.createTime;
         if (item.type === 1) {
-          arr.push(item.message);
+          arr.push(item.messageContent);
         }
-        console.log(item.time);
+        console.log(item.createTime);
         if (index === 0) {
-          item.showTime = _date_tool.default.chatTime(item.time);
+          item.showTime = _date_tool.default.chatTime(item.createTime);
         } else {
-          item.showTime = _date_tool.default.intervalTime(oldTime, item.time) === '' ? '' : _date_tool.default.chatTime(item.time);
+          item.showTime = _date_tool.default.intervalTime(oldTime, item.createTime) === '' ? '' : _date_tool.default.chatTime(item.createTime);
         }
-        // oldTime = temp
+        item.createTime = new Date(item.createTime).getTime();
+        oldTime = temp;
       });
-
-      if (this.curPage === 0) {
+      if (this.queryObj.page === 1) {
         this.msgs = msgsArr;
         //处理滚动条
         this.$nextTick(function () {
-          this.scrollToView = 'msg' + msgsArr[msgsArr.length - 1].id;
+          this.scrollToView = 'msg' + msgsArr[msgsArr.length - 1].createTime;
         });
       } else {
         clearInterval(this.loading);
@@ -428,57 +429,71 @@ var _default = {
         // 	this.scrollToView = 'msg' + msgsArr[msgsArr.length - 1].id
         // })
       }
-
-      this.curPage = page;
+      // this.curPage = page
     },
     //滚动顶部加载上一页
     nextPage: function nextPage() {
+      console.log("下一页");
       //判断是否还有数据, 且当前页是否为0
-
-      var animation = uni.createAnimation({
-        // transformOrigin: "50% 50%",
-        duration: 1000,
-        timingFunction: "step-start"
-        // delay: 0
-      });
-
-      this.animation = animation;
+      if (this.queryObj.size * this.queryObj.page > this.total) {
+        console.log("超过了");
+        return;
+      }
+      if (this.isLoading) return;
+      // var animation = uni.createAnimation({
+      // 	// transformOrigin: "50% 50%",
+      // 	duration: 1000,
+      // 	timingFunction: "step-start",
+      // 	// delay: 0
+      // })
+      // this.animation = animation
+      this.queryObj.page++;
+      this.getChatRecords();
       var i = 1;
-      this.loading = setInterval(function () {
-        animation.rotate(30 * i).step();
-        this.animationData = animation.export();
-        i++;
-        this.isLoading = true;
-        if (i > 40) {
-          var msg = [{
-            "id": "8",
-            "userId": "2",
-            "imgUrl": "../../static/example/avatar.jpg",
-            // "message": '../../static/example/example.jpg',
-            "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-            "type": 1,
-            "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2 * 2
-          }, {
-            "id": "9",
-            "userId": "2",
-            "imgUrl": "../../static/example/avatar.jpg",
-            // "message": '../../static/example/example.jpg',
-            "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-            "type": 1,
-            "time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2 * 2 * 2
-          }];
-          this.getMsg(2, msg);
-        }
-      }.bind(this), 100);
+      var that = this;
+
+      // this.loading = setInterval(function() {
+      // 	animation.rotate(30 * i).step()
+      // 	this.animationData = animation.export()
+      // 	i++
+      // 	if (this.isLoading) return;
+      // 	this.isLoading = true
+      // 	if (i > 40) {
+
+      // 		// let msg = [{
+      // 		// 		"id": "8",
+      // 		// 		"userId": "2",
+      // 		// 		"imgUrl": "../../static/example/avatar.jpg",
+      // 		// 		// "message": '../../static/example/example.jpg',
+      // 		// 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+      // 		// 		"type": 1,
+      // 		// 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2 * 2
+      // 		// 	},
+      // 		// 	{
+      // 		// 		"id": "9",
+      // 		// 		"userId": "2",
+      // 		// 		"imgUrl": "../../static/example/avatar.jpg",
+      // 		// 		// "message": '../../static/example/example.jpg',
+      // 		// 		"message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
+      // 		// 		"type": 1,
+      // 		// 		"time": new Date() - 1000 * 60 * 60 * 24 * 365 * 2 * 2 * 2 * 2
+      // 		// 	}
+      // 	 // ]
+      // 	 console.log("参数:" + this.queryObj.page)
+      // 	 this.queryObj.page++;
+      // 	 this.getChatRecords()
+      // 	 //this.getMsg(msg)
+      // 	}
+      // }.bind(this), 100)
     },
     getTime: function getTime(date, arr, index) {
       // let arr = this.msgs
-      console.log(arr[index - 1].time);
-      console.log(index);
+      //console.log(arr[index - 1].time)
+      console.log("getTime index:" + index);
       if (index === 0) {
         return _date_tool.default.chatTime(date);
       } else {
-        return _date_tool.default.intervalTime(arr[index - 1].time, date) === '' ? '' : _date_tool.default.chatTime(date);
+        return _date_tool.default.intervalTime(arr[index - 1].createTime, date) === '' ? '' : _date_tool.default.chatTime(date);
       }
     },
     //处理时间
@@ -511,68 +526,106 @@ var _default = {
     },
     //滚动到底部
     goToBottom: function goToBottom() {
-      var _this = this;
+      var _this2 = this;
       console.log("最后一个：" + this.msgs.length);
       this.scrollToView = '';
       setTimeout(function () {
-        _this.$nextTick(function () {
-          this.scrollToView = 'msg' + this.msgs[this.msgs.length - 1].id;
+        _this2.$nextTick(function () {
+          this.scrollToView = 'msg' + this.msgs[this.msgs.length - 1].createTime;
         });
       }, 0);
     },
     //发送消息
     input: function input(msg) {
       var message = {
-        "id": "8",
-        "userId": "1",
-        "imgUrl": "../../static/example/avatar.jpg",
-        "message": msg.content,
+        //"id": res.data.data,
+        "senderId": this.userinfo.openId,
+        "senderHeadPortrait": this.userinfo.avatar,
+        "messageContent": msg.content,
+        "inboxHash": this.queryObj.inboxHash,
         // "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-        "type": 0,
-        "time": new Date()
+        "messageType": 0,
+        "createTime": new Date().getTime()
       };
       this.msgs.push(message);
       //处理时间
-      message.showTime = this.getTime(message.time, this.msgs, this.msgs.length - 1);
-
+      var index = this.msgs.length === 0 ? 0 : this.msgs.length - 1;
+      message.showTime = this.getTime(message.createTime, this.msgs, index);
+      this.goToBottom();
+      console.log(msg.messageContent);
+      var queryObj = {
+        "type": 1,
+        "chatRecordSendDTO": {
+          "inboxHash": this.queryObj.inboxHash,
+          "messageContent": msg.content,
+          "messageType": 0,
+          "createTime": new Date().getTime()
+        }
+      };
+      var that = this;
+      this.sendSocketMessage(JSON.stringify(queryObj)).then(function (res) {
+        console.log("sendRes:" + JSON.stringify(res));
+        console.log("发送成功");
+      }).catch(function (res) {
+        console.log("发送失败");
+        console.log(res);
+      });
       // if (msg.type === 1) {
       // 	this.imgMsg.push(msg.content)
       // }
-
-      this.goToBottom();
-      console.log(msg.content);
     },
     uploadPhoto: function uploadPhoto(filePaths) {
       var self = this;
       var length = this.msgs.length;
-      filePaths.forEach(function (item, index) {
+      filePaths.forEach(function (item) {
         var message = {
-          "id": length + index,
-          "userId": "1",
-          "imgUrl": "../../static/example/avatar.jpg",
-          "message": item,
+          "inboxHash": self.queryObj.inboxHash,
+          "senderId": self.userinfo.openId,
+          "senderHeadPortrait": self.userinfo.avatar,
+          "messageContent": item,
           // "message": 'https://img-blog.csdn.net/20181002101903185?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjYzMQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70',
-          "type": 1,
-          "time": new Date()
+          "messageType": 1,
+          "createTime": new Date().getTime()
         };
         self.msgs.push(message);
-        message.showTime = self.getTime(message.time, self.msgs, self.msgs.length - 1);
+        var index = self.msgs.length === 0 ? 0 : self.msgs.length - 1;
+        message.showTime = self.getTime(message.createTime, self.msgs, index);
         self.imgMsg.push(item);
+        var queryObj = {
+          "type": 1,
+          "chatRecordSendDTO": {
+            "inboxHash": self.queryObj.inboxHash,
+            "messageContent": item,
+            "messageType": 1,
+            "createTime": new Date().getTime()
+          }
+        };
+        self.sendSocketMessage(JSON.stringify(queryObj)).then(function (res) {
+          console.log("sendRes:" + JSON.stringify(res));
+          console.log("发送成功");
+        }).catch(function (res) {
+          console.log("发送失败");
+          console.log(res);
+        });
       });
       this.goToBottom();
     },
     connectSocket: function connectSocket() {
       var that = this;
       this.socketTask = uni.connectSocket({
-        url: 'ws://127.0.0.1:8183/campus_runrun',
+        url: 'ws://127.0.0.1:8183/campus_run',
+        header: {
+          'Authorization': that.token,
+          'SocketScene': 'CHAT_RECORD'
+        },
         // header: {
         // 		'content-type': 'application/json'
         // 	},
-        // data() {
-        // 	return {
-        // 		msg: '123'
-        // 	}
-        // },
+        data: function data() {
+          return {
+            type: '0'
+          };
+        },
         complete: function complete(e) {
           console.log(e);
         },
@@ -590,8 +643,22 @@ var _default = {
         that.heart();
       });
       this.socketTask.onMessage(function (res) {
-        console.log("收到服务器内容: " + JSON.stringify(res));
         //对获取内容操作
+        var obj = JSON.parse(res.data);
+        var msg = obj.data.data;
+        if (msg === undefined) return;
+
+        // console.log("我收到消息:" + JSON.stringify(msg))
+        // let arr = []
+        // arr.push(msg)
+        that.msgs.push(msg);
+        var index = that.msgs.length === 0 ? 0 : that.msgs.length - 1;
+        msg.showTime = that.getTime(msg.createTime, that.msgs, index);
+        if (msg.messageType === 1) {
+          that.imgMsg.push(msg.messageContent);
+        }
+        that.goToBottom();
+        //that.getMsg(arr)
       });
 
       //1. 服务器关闭，onError -> onClose 重连
@@ -612,7 +679,7 @@ var _default = {
 
         //如果不是主动关闭的就重新连接
         //socketOpen在连接成功后应该一直是true, 只有onError是false，false的话就要重连
-        if (!that.socketOpen || !that.isUnLoad) {
+        if (!that.socketOpen && !that.isUnLoad) {
           console.log("不是主动关闭的");
           that.reconnect();
         }
@@ -620,24 +687,29 @@ var _default = {
     },
     //进入重新连接
     reconnect: function reconnect() {
-      var _this2 = this;
+      var _this3 = this;
       console.log("进入断线重连");
       this.socketTask = '';
       if (this.reconnectTimer === '') {
         console.log("执行了1次");
         this.reconnectTimer = setInterval(function () {
-          _this2.connectSocket();
+          _this3.connectSocket();
         }, 1000);
       }
       // this.connectSocket()
     },
     //发送消息
     sendSocketMessage: function sendSocketMessage(msg) {
-      var _this3 = this;
+      var _this4 = this;
       console.log("发送信息");
       console.log(JSON.stringify(msg));
+      var that = this;
       return new Promise(function (resolve, reject) {
-        _this3.socketTask.send({
+        _this4.socketTask.send({
+          header: {
+            'Authorization': that.token,
+            'SocketScene': 'CHAT_RECORD'
+          },
           data: msg,
           success: function success(res) {
             console.log("发送成功");

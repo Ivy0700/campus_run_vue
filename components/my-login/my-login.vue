@@ -59,7 +59,8 @@
 				//更新userinfo
 				let userInfo = {
 					avatar: loginRes.data.data.data.headPortrait,
-					nickname: loginRes.data.data.data.username
+					nickname: loginRes.data.data.data.username,
+					openId: loginRes.data.data.data.openId
 
 				}
 				this.updateUserInfo(userInfo)

@@ -216,7 +216,8 @@ var _default = {
                 //更新userinfo
                 userInfo = {
                   avatar: loginRes.data.data.data.headPortrait,
-                  nickname: loginRes.data.data.data.username
+                  nickname: loginRes.data.data.data.username,
+                  openId: loginRes.data.data.data.openId
                 };
                 _this2.updateUserInfo(userInfo);
                 _this2.navigateBack();

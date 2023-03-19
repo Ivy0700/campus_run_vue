@@ -102,24 +102,6 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var g0 = _vm.list.length
-  var l0 = _vm.__map(_vm.list, function (chat, i) {
-    var $orig = _vm.__get_orig(chat)
-    var m0 = g0 !== 0 ? _vm.changeTime(chat.time) : null
-    return {
-      $orig: $orig,
-      m0: m0,
-    }
-  })
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        g0: g0,
-        l0: l0,
-      },
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -153,42 +135,34 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(uni) {
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 51));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 53));
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var _date_tool = _interopRequireDefault(__webpack_require__(/*! ../../tools/date_tool.js */ 68));
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+var _user = _interopRequireDefault(__webpack_require__(/*! ../../store/user */ 35));
+var _vuex = __webpack_require__(/*! vuex */ 34);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var _default = {
+  computed: _objectSpread({}, (0, _vuex.mapState)('m_user', ['token', 'userinfo'])),
+  onLoad: function onLoad() {},
+  onUnload: function onUnload() {
+    this.isUnLoad = true;
+    clearInterval(this.reconnectTimer);
+    clearInterval(this.timer);
+    this.closeSocket();
+  },
+  onShow: function onShow() {
+    this.getChatList();
+    this.connectSocket();
+  },
   data: function data() {
     return {
       list: [{
@@ -203,17 +177,217 @@ var _default = {
         "name": "张三",
         "time": new Date(),
         "unReadNum": 2
-      }]
+      }],
+      map: {},
+      socketTask: '',
+      timer: '',
+      reconnectTimer: '',
+      socketOpen: false,
+      isUnLoad: false
     };
   },
   methods: {
     changeTime: function changeTime(date) {
+      console.log("data:" + date);
       return _date_tool.default.dateTime(date);
     },
-    join: function join() {}
+    join: function join() {},
+    getChatList: function getChatList() {
+      var _this = this;
+      return (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var _yield$uni$$http$get, res;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return uni.$http.get('/api/inbox/getInboxList');
+              case 2:
+                _yield$uni$$http$get = _context.sent;
+                res = _yield$uni$$http$get.data;
+                console.log(res);
+                if (!(res.code !== 20000)) {
+                  _context.next = 7;
+                  break;
+                }
+                return _context.abrupt("return", uni.$showMsg());
+              case 7:
+                _this.list = res.data.data;
+                _this.buildMap(_this.list);
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    buildMap: function buildMap(list) {
+      var obj = new Map();
+      for (var i = 0; i < list.length; i++) {
+        var chat = list[i];
+        chat.showTime = this.changeTime(chat.lastMsgTime);
+        obj[chat.inboxHash] = chat;
+      }
+      console.log("map:" + JSON.stringify(obj));
+      console.log("mapSize:" + obj.size);
+      // console.log("content:" + obj[0])
+      this.map = obj;
+    },
+    goToChat: function goToChat(inboxHash) {
+      uni.navigateTo({
+        url: '/subpkg/chat/chat?inboxHash=' + inboxHash
+      });
+    },
+    connectSocket: function connectSocket() {
+      var that = this;
+      this.socketTask = uni.connectSocket({
+        url: 'ws://127.0.0.1:8183/campus_run',
+        header: {
+          'Authorization': that.token,
+          'SocketScene': 'CHAT_LIST'
+        },
+        data: function data() {},
+        complete: function complete(e) {
+          console.log(e);
+        },
+        fail: function fail(e) {
+          console.log(e);
+        },
+        success: function success(e) {
+          console.log(e);
+        }
+      });
+      this.socketTask.onOpen(function (res) {
+        console.log("WebSocket连接已打开");
+        clearInterval(that.reconnectTimer);
+        //定期发送心跳
+        that.heart();
+      });
+      this.socketTask.onMessage(function (res) {
+        //对获取内容操作
+        var obj = JSON.parse(res.data);
+        var msg = obj.data.data;
+        if (msg === undefined) return;
+        console.log(msg);
+
+        //that.msgs.push(msg)
+        var chat = that.map[msg.inboxHash];
+        chat.lastMsgTime = msg.lastMsgTime;
+        chat.showTime = that.changeTime(msg.lastMsgTime);
+        chat.lastMsgType = msg.lastMsgType;
+        chat.lastMsgContent = msg.lastMsgContent;
+        chat.seen = msg.seen;
+        var map = that.map;
+        //根据最后一条消息时间排序
+        var sortedArray = Array.from(map.entries()).forEach(function (a, b) {
+          var date1 = new Date(a[1].lastMsgTime);
+          var date2 = new Date(b[1].lastMsgTime);
+          return date1.getTime() - date2.getTime();
+        });
+        that.map = new Map(sortedArray);
+        console.log("sortedArr:" + JSON.stringify(sortedArray));
+      });
+
+      //1. 服务器关闭，onError -> onClose 重连
+      //2. 服务器关闭通道， onClose 重连
+      //3. wss, onError-> onClose 重连
+      this.socketTask.onError(function (res) {
+        console.log("WebSocket连接打开失败，请检查");
+        console.log(res);
+        that.socketOpen = false;
+        //进入重新连接
+        // that.reconnect()
+      });
+
+      this.socketTask.onClose(function (e) {
+        console.log("WebSocket连接关闭");
+        clearInterval(that.timer);
+        that.timer = '';
+
+        //如果不是主动关闭的就重新连接
+        //socketOpen在连接成功后应该一直是true, 只有onError是false，false的话就要重连
+        if (!that.socketOpen && !that.isUnLoad) {
+          console.log("不是主动关闭的");
+          that.reconnect();
+        }
+      });
+    },
+    //进入重新连接
+    reconnect: function reconnect() {
+      var _this2 = this;
+      console.log("进入断线重连");
+      this.socketTask = '';
+      if (this.reconnectTimer === '') {
+        console.log("执行了1次");
+        this.reconnectTimer = setInterval(function () {
+          _this2.connectSocket();
+        }, 1000);
+      }
+      // this.connectSocket()
+    },
+    heart: function heart() {
+      var that = this;
+      clearInterval(this.timer);
+      this.timer = '';
+      var msg = {
+        "type": "3"
+      };
+      this.timer = setInterval(function () {
+        that.sendSocketMessage(JSON.stringify(msg)).then(function (res) {
+          console.log("心跳成功");
+        }).catch(function (res) {
+          console.log("发送失败");
+          console.log(res);
+        });
+      }, 4000);
+    },
+    //主动关闭连接
+    closeSocket: function closeSocket() {
+      //已经关了
+      if (!this.socketOpen) {
+        return;
+      }
+      this.socketTask.closeSocket({
+        success: function success(e) {
+          console.log("成功关闭连接");
+          console.log(e);
+        },
+        fail: function fail(e) {
+          console.log("关闭连接失败");
+          console.log(e);
+        }
+      });
+    },
+    //发送消息
+    sendSocketMessage: function sendSocketMessage(msg) {
+      var _this3 = this;
+      console.log("发送信息");
+      console.log(JSON.stringify(msg));
+      var that = this;
+      return new Promise(function (resolve, reject) {
+        _this3.socketTask.send({
+          header: {
+            'Authorization': that.token,
+            'SocketScene': 'CHAT_LIST'
+          },
+          data: msg,
+          success: function success(res) {
+            console.log("发送成功");
+            resolve(res);
+          },
+          fail: function fail(res) {
+            console.log("发送失败");
+            console.log(res);
+            reject(res);
+          }
+        });
+      });
+    }
   }
 };
 exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
 
