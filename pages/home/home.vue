@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="container">
 		<!-- 搜索组件 -->
 		<view class="search-box">
 
@@ -29,9 +29,16 @@
 		</view>
 
 		<!-- 跑腿需求列表 -->
-		<block v-for="(post, i) in list" :key="i" @click="gotoOrder(post.orderId)">
+		<block v-for="(post, i) in list" :key="i" @click="gotoOrder(post.orderId)" v-if="list.length !== 0">
 			<my-post :post="post"></my-post>
 		</block>
+		
+		<view class="empty-section" v-show="list.length === 0">
+			<image class="empty-img" mode="widthFix"
+				src="https://img.icons8.com/stickers/100/null/list-is-empty.png">
+			</image>
+			<text class="empty-text">您还没有相关的订单</text>
+		</view>
 
 	</view>
 </template>
@@ -39,7 +46,6 @@
 <script>
 	export default {
 		onLoad() {
-			console.log("onLoad")
 			this.queryObj = {
 				"content": null,
 				"orderBy": "create_time",
@@ -49,15 +55,34 @@
 			}
 			this.orderList();
 		},
-		onShow() {
-			console.log("onShow:")
+		onShow(options) {
+			console.log("onShow:" + options)
+			
+			const searchKey = uni.getStorageSync("searchKey");
+			//const searchValue = searchKey.data
+			console.log( "searchKey:"+ searchKey)
+			
+			if (searchKey) {
+				this.resetParam()
+				this.queryObj = {
+					"content": searchKey,
+					"orderBy": "create_time",
+					"isAsc": false,
+					"page": 1,
+					"size": 10
+				}
+				console.log("我进来了searchKey")
+				this.orderList()
+			}
 			const statusChanged = uni.getStorageSync("statusChanged");
 			console.log(statusChanged)
 			if (statusChanged) {
 				this.resetParam()
 				this.orderList()
+				console.log("我进来了status")
 			}
 			uni.removeStorageSync("statusChanged")
+			uni.removeStorageSync("searchKey")
 			
 		},
 		data() {
@@ -71,8 +96,11 @@
 				total: 0,
 				isLoading: false,
 				queryObj: {
-					page: 1,
-					size: 10
+					"content": null,
+					"orderBy": "create_time",
+					"isAsc": false,
+					"page": 1,
+					"size": 10
 				},
 
 			};
@@ -139,6 +167,7 @@
 				if (res.code !== 20000) {
 					return uni.$showMsg()
 				}
+				
 				this.list = [...this.list, ...res.data.data.list]
 				this.total = res.data.data.totalCount
 			},
@@ -147,6 +176,7 @@
 				this.queryObj.page = 1
 				this.total = 0
 				this.isLoading = false
+				this.queryObj.content = null
 				this.list = []
 			}
 		},
@@ -296,6 +326,32 @@
 			bottom: 0;
 			left: 0;
 
+		}
+	}
+	// .container {
+	// 	display: flex;
+	// 	flex-direction: column;
+	// 	justify-content: center;
+	// 	align-items: center;
+	// }
+	.empty-section {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		top: 300rpx;
+	
+		.empty-img {
+			padding-top: 50rpx;
+			height: 180rpx;
+			width: 180rpx;
+		}
+	
+		.empty-text {
+			font-size: 13px;
+			padding-top: 17rpx;
+			color: #828282;
 		}
 	}
 </style>

@@ -101,13 +101,13 @@ var components
 try {
   components = {
     mySearch: function () {
-      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 163))
+      return __webpack_require__.e(/*! import() | components/my-search/my-search */ "components/my-search/my-search").then(__webpack_require__.bind(null, /*! @/components/my-search/my-search.vue */ 165))
     },
     uniPopup: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 170))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-popup/components/uni-popup/uni-popup */ "uni_modules/uni-popup/components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-popup/components/uni-popup/uni-popup.vue */ 172))
     },
     myPost: function () {
-      return Promise.all(/*! import() | components/my-post/my-post */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/my-post/my-post")]).then(__webpack_require__.bind(null, /*! @/components/my-post/my-post.vue */ 177))
+      return Promise.all(/*! import() | components/my-post/my-post */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/my-post/my-post")]).then(__webpack_require__.bind(null, /*! @/components/my-post/my-post.vue */ 179))
     },
   }
 } catch (e) {
@@ -131,6 +131,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.list.length
+  var g1 = _vm.list.length
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0,
+        g1: g1,
+      },
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -212,9 +223,15 @@ var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/r
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   onLoad: function onLoad() {
-    console.log("onLoad");
     this.queryObj = {
       "content": null,
       "orderBy": "create_time",
@@ -224,15 +241,32 @@ var _default = {
     };
     this.orderList();
   },
-  onShow: function onShow() {
-    console.log("onShow:");
+  onShow: function onShow(options) {
+    console.log("onShow:" + options);
+    var searchKey = uni.getStorageSync("searchKey");
+    //const searchValue = searchKey.data
+    console.log("searchKey:" + searchKey);
+    if (searchKey) {
+      this.resetParam();
+      this.queryObj = {
+        "content": searchKey,
+        "orderBy": "create_time",
+        "isAsc": false,
+        "page": 1,
+        "size": 10
+      };
+      console.log("我进来了searchKey");
+      this.orderList();
+    }
     var statusChanged = uni.getStorageSync("statusChanged");
     console.log(statusChanged);
     if (statusChanged) {
       this.resetParam();
       this.orderList();
+      console.log("我进来了status");
     }
     uni.removeStorageSync("statusChanged");
+    uni.removeStorageSync("searchKey");
   },
   data: function data() {
     return {
@@ -245,8 +279,11 @@ var _default = {
       total: 0,
       isLoading: false,
       queryObj: {
-        page: 1,
-        size: 10
+        "content": null,
+        "orderBy": "create_time",
+        "isAsc": false,
+        "page": 1,
+        "size": 10
       }
     };
   },
@@ -340,6 +377,7 @@ var _default = {
       this.queryObj.page = 1;
       this.total = 0;
       this.isLoading = false;
+      this.queryObj.content = null;
       this.list = [];
     }
   },
